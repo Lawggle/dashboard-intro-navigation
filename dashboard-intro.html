@@ -1,0 +1,237 @@
+<script>
+  // Wait for page to load
+  document.addEventListener("DOMContentLoaded", function () {
+    // Check if user has already seen the tour
+    async function checkIfShouldRunTour() {
+      try {
+        if (typeof window.$memberstackDom !== "undefined") {
+          const { data: member } =
+            await window.$memberstackDom.getCurrentMember();
+
+          if (member) {
+            const memberJson = await window.$memberstackDom.getMemberJSON();
+
+            // Only run tour if hasLoggedInBefore is null, undefined, or false
+            if (memberJson.data.hasLoggedInBefore === true) {
+              console.log("User has already seen the tour, skipping...");
+              return false;
+            }
+          }
+        }
+        return true; // Run tour for new users or when memberstack is not available
+      } catch (error) {
+        console.error("Error checking tour status:", error);
+        return true; // Run tour on error to be safe
+      }
+    }
+
+    // Initialize tour only if conditions are met
+    checkIfShouldRunTour().then((shouldRun) => {
+      if (!shouldRun) return;
+
+      // Configure intro.js options
+      const dashboardBtn = document.getElementById("dashboard-btn");
+      if (dashboardBtn) {
+        dashboardBtn.click();
+      }
+
+      const advancedUserSteps = [
+        {
+          element: "#my-stats-btn",
+          intro:
+            "Your personal performance dashboard. Track your response times, conversion rates, and other key metrics that matter. Consider it your practice's vital signs – because you can't improve what you don't measure. Time to see the evidence of your efforts.",
+          position: "right",
+        },
+        {
+          element: "#c-metrics-button",
+          intro:
+            "Where you see how you measure up against opposing counsel (on the platform, that is). Consider this your performance review against the competition. Nothing motivates quite like seeing exactly where you rank in the pecking order. Time to raise the bar.",
+          position: "right",
+        },
+        {
+          element: "#my-messages-btn",
+          intro:
+            "Where potential clients become actual clients. This is your direct line to every lead – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count.",
+          position: "right",
+        },
+        {
+          element: "#profile-btn",
+          intro:
+            "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice.",
+          position: "right",
+        },
+        {
+          element: "#feedback-section",
+          intro:
+            "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief.",
+          position: "left",
+        },
+        {
+          element: "#ai-rec-section",
+          intro:
+            "Your personalized practice improvement plan, refreshed every 5 days. Our AI reviews your profile like opposing counsel would – finding every gap and weak point. Complete these suggestions to boost your profile strength score and completion percentage. Note: changes won't reflect immediately; think of it as a 5-day review period. The higher your score, the more compelling your case to potential clients.",
+          position: "top",
+        },
+        {
+          element: "#ai-bot-btn",
+          intro:
+            "Your digital associate, minus the billable hours. While it can't access your dashboard data, it can guide you through platform features, draft documents, brainstorm strategies, or answer virtually any question. Think of it as having a knowledgeable colleague on call 24/7 – one who never takes vacation or needs coffee. From contract templates to case law queries, just ask.",
+          position: "left",
+        },
+      ];
+
+      const essentialUserSteps = [
+        {
+          element: "#my-stats-btn-locked",
+          intro:
+            "Your personal performance dashboard. Track your response times, conversion rates, and other key metrics that matter. Consider it your practice's vital signs – because you can't improve what you don't measure. Time to see the evidence of your efforts.",
+          position: "right",
+        },
+        {
+          element: "#c-metrics-button-locked",
+          intro:
+            "Where you see how you measure up against opposing counsel (on the platform, that is). Consider this your performance review against the competition. Nothing motivates quite like seeing exactly where you rank in the pecking order. Time to raise the bar.",
+          position: "right",
+        },
+        {
+          element: "#my-messages-btn",
+          intro:
+            "Where potential clients become actual clients. This is your direct line to every lead – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count.",
+          position: "right",
+        },
+        {
+          element: "#profile-btn",
+          intro:
+            "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice.",
+          position: "right",
+        },
+        {
+          element: "#feedback-section",
+          intro:
+            "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief.",
+          position: "left",
+        },
+        {
+          element: "#locked-ai-rec",
+          intro:
+            "Your personalized practice improvement plan, refreshed every 5 days. Our AI reviews your profile like opposing counsel would – finding every gap and weak point. Complete these suggestions to boost your profile strength score and completion percentage. Note: changes won't reflect immediately; think of it as a 5-day review period. The higher your score, the more compelling your case to potential clients.",
+          position: "top",
+        },
+        {
+          element: "#ai-bot-btn",
+          intro:
+            "Your digital associate, minus the billable hours. While it can't access your dashboard data, it can guide you through platform features, draft documents, brainstorm strategies, or answer virtually any question. Think of it as having a knowledgeable colleague on call 24/7 – one who never takes vacation or needs coffee. From contract templates to case law queries, just ask.",
+          position: "left",
+        },
+      ];
+
+      // Store the configured instance
+      const intro = introJs().setOptions({
+        nextLabel: "Next →",
+        prevLabel: "← Back",
+        doneLabel: "Done!",
+        showProgress: false,
+        showBullets: false,
+        exitOnOverlayClick: false,
+        exitOnEsc: true,
+        disableInteraction: true,
+        showStepNumbers: true,
+        stepNumbersOfLabel: "/",
+      });
+
+      try {
+        if (typeof window.$memberstackDom !== "undefined") {
+          window.$memberstackDom
+            .getCurrentMember()
+            .then(function ({ data: member }) {
+              if (member) {
+                console.log("Member is logged in:", member);
+                const membershipPlan = member.planConnections[0]; // Assuming the first plan is the active one
+                console.log("Current membership plan:", membershipPlan);
+
+                if (membershipPlan) {
+                  const membershipPlanId = membershipPlan.planId;
+                  console.log("Current membership ID:", membershipPlanId);
+
+                  const advancedMembershipPlanIds = [
+                    "pln_lawggle-advanced-v2-r74e0sgz",
+                    "pln_lawggle-advanced-v2-a6t0erf",
+                  ];
+
+                  if (advancedMembershipPlanIds.includes(membershipPlanId)) {
+                    // Use advanced user steps
+                    intro.setOptions({ steps: advancedUserSteps });
+                  } else {
+                    // Use essential user steps
+                    intro.setOptions({ steps: essentialUserSteps });
+                  }
+                } else {
+                  console.warn(
+                    "Member is logged in but has no active membership plan."
+                  );
+                }
+              } else {
+                console.log("No member is logged in.");
+              }
+            })
+            .catch(function (error) {
+              console.error("Error retrieving MemberStack member:", error);
+            });
+        } else {
+          console.log("No member is logged in.");
+        }
+      } catch (error) {
+        console.error("Error in MemberStack membership check:", error);
+      }
+
+      setTimeout(() => {
+        // Start tour using the same configured instance
+        intro.start();
+      }, 4000);
+
+      intro.oncomplete(() => {
+        const memberstack = window.$memberstackDom;
+
+        // memberstack.getCurrentMember().then(async ({ data: member }) => {
+        //   // if the member is logged in
+        //   if (member) {
+        //     // Get current member's JSON
+        //     let memberJson = await memberstack.getMemberJSON();
+
+        //     // Modify or add new data
+        //     memberJson.hasLoggedInBefore = true;
+
+        //     // Update member's JSON
+        //     const updatedJson = await memberstack.updateMemberJSON({
+        //       json: memberJson,
+        //     });
+
+        //     console.log("Member JSON updated:", updatedJson);
+        //   }
+        // });
+      });
+
+      intro.onexit(() => {
+        const memberstack = window.$memberstackDom;
+
+        // memberstack.getCurrentMember().then(async ({ data: member }) => {
+        //   // if the member is logged in
+        //   if (member) {
+        //     // Get current member's JSON
+        //     let memberJson = await memberstack.getMemberJSON();
+
+        //     // Modify or add new data
+        //     memberJson.hasLoggedInBefore = true;
+
+        //     // Update member's JSON
+        //     const updatedJson = await memberstack.updateMemberJSON({
+        //       json: memberJson,
+        //     });
+
+        //     console.log("Member JSON updated:", updatedJson);
+        //   }
+        // });
+      });
+    }); // End of checkIfShouldRunTour().then()
+  });
+</script>
