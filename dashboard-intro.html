@@ -29,6 +29,36 @@
     checkIfShouldRunTour().then((shouldRun) => {
       if (!shouldRun) return;
 
+      // Pre-load Lottie animation data
+      let lottieAnimationData = null;
+
+      // Load animation JSON once
+      fetch(
+        "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/6836fc39d91ffe6feec2f253_data5.json"
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          lottieAnimationData = data;
+        })
+        .catch((error) => {
+          console.error("Error loading Lottie animation:", error);
+        });
+
+      // Helper function to create intro content with Lottie
+      function createIntroContent(title, description) {
+        return `
+          <div class="custom-intro-content">
+            <div class="lottie-side">
+              <div class="intro-lottie-container"></div>
+            </div>
+            <div class="content-side">
+              <h3>${title}</h3>
+              <p>${description}</p>
+            </div>
+          </div>
+        `;
+      }
+
       // Configure intro.js options
       const dashboardBtn = document.getElementById("dashboard-btn");
       if (dashboardBtn) {
@@ -38,8 +68,10 @@
       const advancedUserSteps = [
         {
           element: "#my-stats-btn",
-          intro:
-            "Your personal performance dashboard. Track your response times, conversion rates, and other key metrics that matter. Consider it your practice's vital signs – because you can't improve what you don't measure. Time to see the evidence of your efforts.",
+          intro: createIntroContent(
+            "Performance Dashboard",
+            "Your personal performance dashboard. Track your response times, conversion rates, and other key metrics that matter. Consider it your practice's vital signs – because you can't improve what you don't measure."
+          ),
           position: "right",
         },
         {
@@ -137,6 +169,26 @@
         disableInteraction: true,
         showStepNumbers: true,
         stepNumbersOfLabel: "/",
+      });
+
+      // Initialize Lottie animation for all steps
+      intro.onafterchange(function (targetElement) {
+        const lottieContainer = document.querySelector(
+          ".introjs-tooltip .intro-lottie-container"
+        );
+        if (lottieContainer && lottieAnimationData) {
+          // Clear previous animation
+          lottieContainer.innerHTML = "";
+
+          // Create new animation
+          lottie.loadAnimation({
+            container: lottieContainer,
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            animationData: lottieAnimationData, // Use pre-loaded data instead of path
+          });
+        }
       });
 
       try {
