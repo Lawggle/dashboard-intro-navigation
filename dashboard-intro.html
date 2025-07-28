@@ -7,6 +7,12 @@
     background-color: #ffe0b6;
     box-shadow: 0px 4px 32px -4px #ffe0b6;
   }
+
+  @media (max-width: 768px) {
+    .introjs-tooltip {
+      min-width: unset;
+    }
+  }
   .introjs-tooltiptext {
     padding: 10px 20px;
   }
@@ -18,7 +24,6 @@
   .intro-lottie-container {
     width: 120px;
     height: 120px;
-    border: 1px solid black;
   }
   .introjs-arrow.right {
     border-left-color: #ffe0b6 !important;
@@ -45,40 +50,36 @@
     display: flex;
     justify-content: flex-end;
     gap: 10px;
+    border-color: #514f6e26;
   }
   .introjs-button {
-    padding: 0px;
+    padding: 3px 2px;
     border: 0px;
     background-color: #ffe0b6;
     font-weight: 600;
+    position: relative;
   }
   .introjs-button:hover {
     background-color: #ffe0b6;
   }
+  /* 
   .introjs-button.introjs-prevbutton::after {
+    content: "";
+    position: absolute;
     height: 100%;
-    width: 2px;
-    background-color: black;
-  }
-
-  /* This targets the actual overlay background */
-  .introjs-overlay {
-    background-color: rgba(255, 0, 0, 0.8) !important; /* Your custom color */
-  }
-
-  /* If you specifically need to target disableInteraction */
-  div.introjs-disableInteraction {
-    background-color: rgba(0, 255, 0, 0.5) !important;
-    pointer-events: none !important;
-  }
-
-  /* Even more specific targeting */
-  body .introjs-disableInteraction {
-    background: rgba(0, 0, 255, 0.6) !important;
-  }
-
+    width: 0.9px;
+    background-color: #514f6e;
+    right: -6px;
+    top: 0;
+  } */
   .intro-title {
     padding-bottom: 10px;
+  }
+
+  .intro-description {
+    line-height: 1.5;
+    color: #1f1f1f;
+    font-weight: 400;
   }
 </style>
 
@@ -111,7 +112,13 @@
 
     // Initialize tour only if conditions are met
     checkIfShouldRunTour().then((shouldRun) => {
-      if (!shouldRun) return;
+      console.log("🎭 Tour should run:", shouldRun);
+      if (!shouldRun) {
+        console.log("❌ Tour cancelled - user has already seen it");
+        return;
+      }
+
+      console.log("✅ Initializing tour for new user");
 
       // Pre-load Lottie animation data
       let lottieAnimationData = null;
@@ -137,7 +144,7 @@
             </div>
             <div class="content-side">
               <h3 class="intro-title">${title}</h3>
-              <p>${description}</p>
+              <p class="intro-description">${description}</p>
             </div>
           </div>
         `;
@@ -145,6 +152,10 @@
 
       // Configure intro.js options
       const dashboardBtn = document.getElementById("dashboard-btn");
+      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      if (mobileMenuBtn && isMobileDevice()) {
+        mobileMenuBtn.click();
+      }
       if (dashboardBtn) {
         dashboardBtn.click();
       }
@@ -189,6 +200,74 @@
             "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief."
           ),
           position: "left",
+        },
+        {
+          element: "#ai-rec-section",
+          intro: createIntroContent(
+            "AI Recommendations",
+            "Your personalized practice improvement plan, refreshed every 5 days. Our AI reviews your profile like opposing counsel would – finding every gap and weak point. Complete these suggestions to boost your profile strength score and completion percentage. Note: changes won't reflect immediately; think of it as a 5-day review period. The higher your score, the more compelling your case to potential clients."
+          ),
+          position: "top",
+        },
+        {
+          element: "#ai-bot-btn",
+          intro: createIntroContent(
+            "AI Assistant",
+            "Your digital associate, minus the billable hours. While it can't access your dashboard data, it can guide you through platform features, draft documents, brainstorm strategies, or answer virtually any question. Think of it as having a knowledgeable colleague on call 24/7 – one who never takes vacation or needs coffee. From contract templates to case law queries, just ask."
+          ),
+          position: "left",
+        },
+      ];
+
+      const advancedMobileUserSteps = [
+        {
+          element: "#my-stats-btn",
+          intro: createIntroContent(
+            "My Statistics",
+            "Your personal performance dashboard. Track your response times, conversion rates, and other key metrics that matter. Consider it your practice's vital signs – because you can't improve what you don't measure."
+          ),
+          position: "right",
+        },
+        {
+          element: "#c-metrics-button",
+          intro: createIntroContent(
+            "Competitive Metrics",
+            "Where you see how you measure up against opposing counsel (on the platform, that is). Consider this your performance review against the competition. Nothing motivates quite like seeing exactly where you rank in the pecking order. Time to raise the bar."
+          ),
+          position: "right",
+        },
+        {
+          element: "#my-messages-btn",
+          intro: createIntroContent(
+            "My Messages",
+            "Where potential clients become actual clients. This is your direct line to every lead – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count."
+          ),
+          position: "right",
+        },
+        {
+          element: "#profile-btn",
+          intro: createIntroContent(
+            "Profile Settings Page",
+            "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice."
+          ),
+          position: "right",
+        },
+        {
+          element: "#feedback-section",
+          intro: createIntroContent(
+            "Feedback",
+            "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief."
+          ),
+          position: "left",
+          beforeStep: () => {
+            // Ensure feedback section is visible
+            const backgroundLayer = document.getElementById(
+              "sidebar4_background-layer"
+            );
+            if (backgroundLayer) {
+              backgroundLayer.click();
+            }
+          },
         },
         {
           element: "#ai-rec-section",
@@ -267,6 +346,74 @@
         },
       ];
 
+      const essentialMobileUserSteps = [
+        {
+          element: "#my-stats-btn-locked",
+          intro: createIntroContent(
+            "My Stats",
+            "Your personal performance dashboard. Track your response times, conversion rates, and other key metrics that matter. Consider it your practice's vital signs – because you can't improve what you don't measure. Time to see the evidence of your efforts."
+          ),
+          position: "right",
+        },
+        {
+          element: "#c-metrics-button-locked",
+          intro: createIntroContent(
+            "Competitive Metrics",
+            "Where you see how you measure up against opposing counsel (on the platform, that is). Consider this your performance review against the competition. Nothing motivates quite like seeing exactly where you rank in the pecking order. Time to raise the bar."
+          ),
+          position: "right",
+        },
+        {
+          element: "#my-messages-btn",
+          intro: createIntroContent(
+            "My Messages",
+            "Where potential clients become actual clients. This is your direct line to every lead – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count."
+          ),
+          position: "right",
+        },
+        {
+          element: "#profile-btn",
+          intro: createIntroContent(
+            "Profile Settings Page",
+            "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice."
+          ),
+          position: "right",
+        },
+        {
+          element: "#feedback-section",
+          intro: createIntroContent(
+            "Feedback",
+            "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief."
+          ),
+          position: "left",
+          // beforeStep: () => {
+          //   // Ensure feedback section is visible
+          //   const backgroundLayer = document.getElementById(
+          //     "sidebar4_background-layer"
+          //   );
+          //   if (backgroundLayer) {
+          //     backgroundLayer.click();
+          //   }
+          // },
+        },
+        {
+          element: "#locked-ai-rec",
+          intro: createIntroContent(
+            "AI Recommendations",
+            "Your personalized practice improvement plan, refreshed every 5 days. Our AI reviews your profile like opposing counsel would – finding every gap and weak point. Complete these suggestions to boost your profile strength score and completion percentage. Note: changes won't reflect immediately; think of it as a 5-day review period. The higher your score, the more compelling your case to potential clients."
+          ),
+          position: "top",
+        },
+        {
+          element: "#ai-bot-btn",
+          intro: createIntroContent(
+            "AI Assistant",
+            "Your digital associate, minus the billable hours. While it can't access your dashboard data, it can guide you through platform features, draft documents, brainstorm strategies, or answer virtually any question. Think of it as having a knowledgeable colleague on call 24/7 – one who never takes vacation or needs coffee. From contract templates to case law queries, just ask."
+          ),
+          position: "left",
+        },
+      ];
+
       // Store the configured instance
       const intro = introJs().setOptions({
         nextLabel: "Next →",
@@ -281,24 +428,68 @@
         stepNumbersOfLabel: "/",
       });
 
-      // Initialize Lottie animation for all steps
-      intro.onafterchange(function (targetElement) {
+      // Function to initialize Lottie animation
+      function initializeLottieAnimation() {
         const lottieContainer = document.querySelector(
           ".introjs-tooltip .intro-lottie-container"
         );
-        if (lottieContainer && lottieAnimationData) {
-          // Clear previous animation
-          lottieContainer.innerHTML = "";
 
-          // Create new animation
-          lottie.loadAnimation({
-            container: lottieContainer,
-            renderer: "svg",
-            loop: true,
-            autoplay: true,
-            animationData: lottieAnimationData, // Use pre-loaded data instead of path
+        console.log("Lottie container found:", lottieContainer);
+        console.log("Lottie library available:", typeof lottie !== "undefined");
+        console.log("Animation data loaded:", !!lottieAnimationData);
+
+        if (
+          lottieContainer &&
+          typeof lottie !== "undefined" &&
+          lottieAnimationData
+        ) {
+          try {
+            // Clear previous animation
+            lottieContainer.innerHTML = "";
+
+            // Create new animation
+            const animation = lottie.loadAnimation({
+              container: lottieContainer,
+              renderer: "svg",
+              loop: true,
+              autoplay: true,
+              animationData: lottieAnimationData,
+            });
+
+            console.log("Lottie animation created successfully:", animation);
+          } catch (error) {
+            console.error("Error creating Lottie animation:", error);
+          }
+        } else {
+          console.warn("Cannot initialize Lottie animation:", {
+            container: !!lottieContainer,
+            lottieLibrary: typeof lottie !== "undefined",
+            animationData: !!lottieAnimationData,
           });
         }
+      }
+
+      // Initialize Lottie animation for all steps - including first step
+      intro.onbeforechange(function (targetElement) {
+        const currentStepIndex = intro.getCurrentStep();
+        const currentStep = intro._options.steps[currentStepIndex];
+
+        // Only run beforeStep for the feedback-section step
+        if (
+          currentStep &&
+          currentStep.element === "#feedback-section" &&
+          typeof currentStep.beforeStep === "function"
+        ) {
+          currentStep.beforeStep();
+        }
+
+        // Small delay to ensure tooltip is rendered
+        setTimeout(initializeLottieAnimation, 100);
+      });
+
+      // Also initialize on after change for step transitions
+      intro.onafterchange(function (targetElement) {
+        initializeLottieAnimation();
       });
 
       try {
@@ -321,11 +512,19 @@
                   ];
 
                   if (advancedMembershipPlanIds.includes(membershipPlanId)) {
-                    // Use advanced user steps
-                    intro.setOptions({ steps: advancedUserSteps });
+                    // Use appropriate steps based on device type
+                    if (isMobileDevice()) {
+                      intro.setOptions({ steps: advancedMobileUserSteps });
+                    } else {
+                      intro.setOptions({ steps: advancedUserSteps });
+                    }
                   } else {
                     // Use essential user steps
-                    intro.setOptions({ steps: essentialUserSteps });
+                    if (isMobileDevice()) {
+                      intro.setOptions({ steps: essentialMobileUserSteps });
+                    } else {
+                      intro.setOptions({ steps: essentialUserSteps });
+                    }
                   }
                 } else {
                   console.warn(
@@ -396,4 +595,8 @@
       });
     }); // End of checkIfShouldRunTour().then()
   });
+
+  function isMobileDevice() {
+    return window.innerWidth <= 768;
+  }
 </script>
