@@ -221,20 +221,28 @@
 
       const advancedMobileUserSteps = [
         {
-          element: "#my-stats-btn",
+          element: "#stats-menu-list",
           intro: createIntroContent(
             "My Statistics",
             "Your personal performance dashboard. Track your response times, conversion rates, and other key metrics that matter. Consider it your practice's vital signs – because you can't improve what you don't measure."
           ),
           position: "right",
         },
+        // {
+        //   element: "#c-metrics-button",
+        //   intro: createIntroContent(
+        //     "Competitive Metrics",
+        //     "Where you see how you measure up against opposing counsel (on the platform, that is). Consider this your performance review against the competition. Nothing motivates quite like seeing exactly where you rank in the pecking order. Time to raise the bar."
+        //   ),
+        //   position: "right",
+        // },
         {
-          element: "#c-metrics-button",
+          element: "#feedback-section",
           intro: createIntroContent(
-            "Competitive Metrics",
-            "Where you see how you measure up against opposing counsel (on the platform, that is). Consider this your performance review against the competition. Nothing motivates quite like seeing exactly where you rank in the pecking order. Time to raise the bar."
+            "Feedback",
+            "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief."
           ),
-          position: "right",
+          position: "left",
         },
         {
           element: "#my-messages-btn",
@@ -243,6 +251,30 @@
             "Where potential clients become actual clients. This is your direct line to every lead – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count."
           ),
           position: "right",
+          beforeStep: () => {
+            // Ensure feedback section is visible
+            const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+            if (mobileMenuBtn) {
+              mobileMenuBtn.click();
+            }
+          },
+        },
+        {
+          element: "#ai-rec-section",
+          intro: createIntroContent(
+            "AI Recommendations",
+            // beforeStep removed; logic moved to onbeforechange
+            "Profile Settings Page",
+            "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice."
+          ),
+          position: "right",
+          beforeStep: () => {
+            // Ensure feedback section is visible
+            const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+            if (mobileMenuBtn) {
+              mobileMenuBtn.click();
+            }
+          },
         },
         {
           element: "#profile-btn",
@@ -251,31 +283,6 @@
             "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice."
           ),
           position: "right",
-        },
-        {
-          element: "#feedback-section",
-          intro: createIntroContent(
-            "Feedback",
-            "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief."
-          ),
-          position: "left",
-          beforeStep: () => {
-            // Ensure feedback section is visible
-            const backgroundLayer = document.getElementById(
-              "sidebar4_background-layer"
-            );
-            if (backgroundLayer) {
-              backgroundLayer.click();
-            }
-          },
-        },
-        {
-          element: "#ai-rec-section",
-          intro: createIntroContent(
-            "AI Recommendations",
-            "Your personalized practice improvement plan, refreshed every 5 days. Our AI reviews your profile like opposing counsel would – finding every gap and weak point. Complete these suggestions to boost your profile strength score and completion percentage. Note: changes won't reflect immediately; think of it as a 5-day review period. The higher your score, the more compelling your case to potential clients."
-          ),
-          position: "top",
         },
         {
           element: "#ai-bot-btn",
@@ -401,14 +408,7 @@
           intro: createIntroContent(
             "AI Recommendations",
             "Your personalized practice improvement plan, refreshed every 5 days. Our AI reviews your profile like opposing counsel would – finding every gap and weak point. Complete these suggestions to boost your profile strength score and completion percentage. Note: changes won't reflect immediately; think of it as a 5-day review period. The higher your score, the more compelling your case to potential clients."
-          ),
-          position: "top",
-        },
-        {
-          element: "#ai-bot-btn",
-          intro: createIntroContent(
-            "AI Assistant",
-            "Your digital associate, minus the billable hours. While it can't access your dashboard data, it can guide you through platform features, draft documents, brainstorm strategies, or answer virtually any question. Think of it as having a knowledgeable colleague on call 24/7 – one who never takes vacation or needs coffee. From contract templates to case law queries, just ask."
+            // beforeStep removed; logic moved to onbeforechange
           ),
           position: "left",
         },
@@ -473,14 +473,24 @@
       intro.onbeforechange(function (targetElement) {
         const currentStepIndex = intro.getCurrentStep();
         const currentStep = intro._options.steps[currentStepIndex];
+        console.log("Current step index:", currentStepIndex);
+        console.log("Current step element:", currentStep.element);
 
-        // Only run beforeStep for the feedback-section step
-        if (
-          currentStep &&
-          currentStep.element === "#feedback-section" &&
-          typeof currentStep.beforeStep === "function"
-        ) {
-          currentStep.beforeStep();
+        // Custom step-specific logic for advancedMobileUserSteps
+        if (currentStep && currentStep.element) {
+          // For #my-messages-btn and #profile-btn steps on mobile, ensure feedback section is visible
+          if (
+            (currentStep.element === "#my-messages-btn" ||
+              currentStep.element === "#profile-btn") &&
+            isMobileDevice()
+          ) {
+            const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+            if (mobileMenuBtn) {
+              mobileMenuBtn.click();
+            }
+
+            setTimeout(() => {}, 400);
+          }
         }
 
         // Small delay to ensure tooltip is rendered
