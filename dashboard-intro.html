@@ -10,7 +10,50 @@
 
   @media (max-width: 768px) {
     .introjs-tooltip {
-      min-width: unset;
+      min-width: 90vw;
+      max-width: 95vw;
+      margin: 0 auto;
+    }
+
+    /* Force bottom positioning on mobile */
+    .introjs-tooltip.introjs-bottom {
+      position: fixed !important;
+      bottom: 20px !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      top: auto !important;
+    }
+
+    /* Adjust arrow for bottom positioning */
+    .introjs-arrow.bottom {
+      display: none !important; /* Hide arrow on mobile for cleaner look */
+    }
+
+    /* Special handling for feedback section on mobile */
+    .introjs-tooltip[data-step-element="#feedback-section"] {
+      position: fixed !important;
+      bottom: 20px !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      top: auto !important;
+    }
+
+    .introjs-tooltip[data-step-element="#feedback-section"] .introjs-arrow {
+      display: block !important;
+      border-top-color: #ffe0b6 !important;
+    }
+
+    /* Make tooltip content more mobile-friendly */
+    .custom-intro-content {
+      flex-direction: column;
+      text-align: justify;
+      gap: 15px;
+    }
+
+    .intro-lottie-container {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto;
     }
   }
   .introjs-tooltiptext {
@@ -19,11 +62,40 @@
   .custom-intro-content {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 6px;
   }
+  /* Lottie animation container enhancements */
   .intro-lottie-container {
     width: 120px;
     height: 120px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform: scale(1);
+  }
+
+  .intro-lottie-container.animate-in {
+    animation: lottieSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  @keyframes lottieSlideIn {
+    0% {
+      transform: scale(0.8) translateY(20px);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.05) translateY(5px);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .intro-lottie-container {
+      width: 80px;
+      height: 80px;
+    }
   }
   .introjs-arrow.right {
     border-left-color: #ffe0b6 !important;
@@ -45,13 +117,44 @@
     position: absolute;
     left: 10px;
     color: #1f1f1f;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    animation: stepNumberBounce 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
+
+  @keyframes stepNumberBounce {
+    0% {
+      transform: scale(0.3) rotate(-12deg);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.1) rotate(0deg);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .introjs-helperNumberLayer {
+      font-size: 12px;
+    }
+  }
+
   .introjs-tooltipbuttons {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
     border-color: #514f6e26;
   }
+
+  @media (max-width: 768px) {
+    .introjs-tooltipbuttons {
+      padding: 6px;
+    }
+  }
+
   .introjs-button {
     padding: 3px 2px;
     border: 0px;
@@ -62,6 +165,7 @@
   .introjs-button:hover {
     background-color: #ffe0b6;
   }
+
   /* 
   .introjs-button.introjs-prevbutton::after {
     content: "";
@@ -76,10 +180,122 @@
     padding-bottom: 10px;
   }
 
+  @media (max-width: 768px) {
+    .intro-title {
+      padding-bottom: 0px;
+      font-size: 20px;
+      text-align: center;
+    }
+  }
+
   .intro-description {
     line-height: 1.5;
     color: #1f1f1f;
     font-weight: 400;
+  }
+
+  /* Combined intro content styling */
+  .combined-intro-section {
+    margin-bottom: 20px;
+  }
+
+  .combined-intro-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .intro-divider {
+    margin: 15px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+    opacity: 0.6;
+  }
+
+  @media (max-width: 768px) {
+    .intro-description {
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .intro-divider {
+      margin: 10px 0;
+    }
+  }
+
+  /* Modern step transition animations */
+  .introjs-tooltip {
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .introjs-tooltip.step-transition-out {
+    transform: scale(0.95) translateY(-10px);
+    opacity: 0;
+  }
+
+  .introjs-tooltip.step-transition-in {
+    transform: scale(1.02) translateY(5px);
+    opacity: 0;
+    animation: stepTransitionIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  @keyframes stepTransitionIn {
+    0% {
+      transform: scale(1.02) translateY(5px);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.01) translateY(2px);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* Smooth highlight transitions */
+  .introjs-helperLayer {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  /* Content fade transitions */
+  .custom-intro-content {
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .content-fade-out {
+    opacity: 0;
+  }
+
+  .content-fade-in {
+    opacity: 1;
+  }
+
+  /* Button hover effects */
+  .introjs-button {
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform: translateY(0);
+  }
+
+  .introjs-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .introjs-button:active {
+    transform: translateY(0);
+    transition: all 0.1s ease;
+  }
+
+  /* Progress indicator animation */
+  .introjs-progress {
+    transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  /* Overlay smooth transitions */
+  .introjs-overlay {
+    transition: opacity 0.3s ease-in-out;
   }
 </style>
 
@@ -150,12 +366,35 @@
         `;
       }
 
+      // Helper function to create combined intro content for multiple sections
+      function createCombinedIntroContent(sections) {
+        const sectionsHtml = sections
+          .map(
+            (section) => `
+          <div class="custom-intro-content">
+            <div class="lottie-side">
+              <div class="intro-lottie-container"></div>
+            </div>
+            <div class="content-side">
+              <h3 class="intro-title">${section.title}</h3>
+              <p class="intro-description">${section.description}</p>
+            </div>
+          </div>
+        `
+          )
+          .join(
+            '<hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">'
+          );
+
+        return sectionsHtml;
+      }
+
       // Configure intro.js options
       const dashboardBtn = document.getElementById("dashboard-btn");
-      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-      if (mobileMenuBtn && isMobileDevice()) {
-        mobileMenuBtn.click();
-      }
+      // const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      // if (mobileMenuBtn && isMobileDevice()) {
+      //   mobileMenuBtn.click();
+      // }
       if (dashboardBtn) {
         dashboardBtn.click();
       }
@@ -222,27 +461,27 @@
       const advancedMobileUserSteps = [
         {
           element: "#stats-menu-list",
-          intro: createIntroContent(
-            "My Statistics",
-            "Your personal performance dashboard. Track your response times, conversion rates, and other key metrics that matter. Consider it your practice's vital signs – because you can't improve what you don't measure."
-          ),
-          position: "right",
+          intro: createCombinedIntroContent([
+            {
+              title: "My Statistics",
+              description:
+                "Your personal performance dashboard. Track your response times, conversion rates, and other key metrics that matter. Consider it your practice's vital signs – because you can't improve what you don't measure.",
+            },
+            {
+              title: "Competitive Metrics",
+              description:
+                "Where you see how you measure up against opposing counsel (on the platform, that is). Consider this your performance review against the competition. Nothing motivates quite like seeing exactly where you rank in the pecking order. Time to raise the bar.",
+            },
+          ]),
+          position: "bottom",
         },
-        // {
-        //   element: "#c-metrics-button",
-        //   intro: createIntroContent(
-        //     "Competitive Metrics",
-        //     "Where you see how you measure up against opposing counsel (on the platform, that is). Consider this your performance review against the competition. Nothing motivates quite like seeing exactly where you rank in the pecking order. Time to raise the bar."
-        //   ),
-        //   position: "right",
-        // },
         {
           element: "#feedback-section",
           intro: createIntroContent(
             "Feedback",
             "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief."
           ),
-          position: "left",
+          position: "top",
         },
         {
           element: "#my-messages-btn",
@@ -250,24 +489,16 @@
             "My Messages",
             "Where potential clients become actual clients. This is your direct line to every lead – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count."
           ),
-          position: "right",
-          beforeStep: () => {
-            // Ensure feedback section is visible
-            const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-            if (mobileMenuBtn) {
-              mobileMenuBtn.click();
-            }
-          },
+          position: "bottom",
         },
         {
           element: "#ai-rec-section",
           intro: createIntroContent(
             "AI Recommendations",
             // beforeStep removed; logic moved to onbeforechange
-            "Profile Settings Page",
             "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice."
           ),
-          position: "right",
+          position: "top",
           beforeStep: () => {
             // Ensure feedback section is visible
             const mobileMenuBtn = document.getElementById("mobile-menu-btn");
@@ -282,7 +513,7 @@
             "Profile Settings Page",
             "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice."
           ),
-          position: "right",
+          position: "bottom",
         },
         {
           element: "#ai-bot-btn",
@@ -290,7 +521,7 @@
             "AI Assistant",
             "Your digital associate, minus the billable hours. While it can't access your dashboard data, it can guide you through platform features, draft documents, brainstorm strategies, or answer virtually any question. Think of it as having a knowledgeable colleague on call 24/7 – one who never takes vacation or needs coffee. From contract templates to case law queries, just ask."
           ),
-          position: "left",
+          position: "top",
         },
       ];
 
@@ -355,36 +586,20 @@
 
       const essentialMobileUserSteps = [
         {
-          element: "#my-stats-btn-locked",
-          intro: createIntroContent(
-            "My Stats",
-            "Your personal performance dashboard. Track your response times, conversion rates, and other key metrics that matter. Consider it your practice's vital signs – because you can't improve what you don't measure. Time to see the evidence of your efforts."
-          ),
-          position: "right",
-        },
-        {
-          element: "#c-metrics-button-locked",
-          intro: createIntroContent(
-            "Competitive Metrics",
-            "Where you see how you measure up against opposing counsel (on the platform, that is). Consider this your performance review against the competition. Nothing motivates quite like seeing exactly where you rank in the pecking order. Time to raise the bar."
-          ),
-          position: "right",
-        },
-        {
-          element: "#my-messages-btn",
-          intro: createIntroContent(
-            "My Messages",
-            "Where potential clients become actual clients. This is your direct line to every lead – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count."
-          ),
-          position: "right",
-        },
-        {
-          element: "#profile-btn",
-          intro: createIntroContent(
-            "Profile Settings Page",
-            "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice."
-          ),
-          position: "right",
+          element: "#stats-menu-list",
+          intro: createCombinedIntroContent([
+            {
+              title: "My Statistics",
+              description:
+                "Your personal performance dashboard. Track your response times, conversion rates, and other key metrics that matter. Consider it your practice's vital signs – because you can't improve what you don't measure.",
+            },
+            {
+              title: "Competitive Metrics",
+              description:
+                "Where you see how you measure up against opposing counsel (on the platform, that is). Consider this your performance review against the competition. Nothing motivates quite like seeing exactly where you rank in the pecking order. Time to raise the bar.",
+            },
+          ]),
+          position: "bottom",
         },
         {
           element: "#feedback-section",
@@ -392,25 +607,47 @@
             "Feedback",
             "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief."
           ),
-          position: "left",
-          // beforeStep: () => {
-          //   // Ensure feedback section is visible
-          //   const backgroundLayer = document.getElementById(
-          //     "sidebar4_background-layer"
-          //   );
-          //   if (backgroundLayer) {
-          //     backgroundLayer.click();
-          //   }
-          // },
+          position: "top",
+        },
+        {
+          element: "#my-messages-btn",
+          intro: createIntroContent(
+            "My Messages",
+            "Where potential clients become actual clients. This is your direct line to every lead – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count."
+          ),
+          position: "bottom",
         },
         {
           element: "#locked-ai-rec",
           intro: createIntroContent(
             "AI Recommendations",
-            "Your personalized practice improvement plan, refreshed every 5 days. Our AI reviews your profile like opposing counsel would – finding every gap and weak point. Complete these suggestions to boost your profile strength score and completion percentage. Note: changes won't reflect immediately; think of it as a 5-day review period. The higher your score, the more compelling your case to potential clients."
             // beforeStep removed; logic moved to onbeforechange
+            "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice."
           ),
-          position: "left",
+          position: "top",
+          beforeStep: () => {
+            // Ensure feedback section is visible
+            const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+            if (mobileMenuBtn) {
+              mobileMenuBtn.click();
+            }
+          },
+        },
+        {
+          element: "#profile-btn",
+          intro: createIntroContent(
+            "Profile Settings Page",
+            "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice."
+          ),
+          position: "bottom",
+        },
+        {
+          element: "#ai-bot-btn",
+          intro: createIntroContent(
+            "AI Assistant",
+            "Your digital associate, minus the billable hours. While it can't access your dashboard data, it can guide you through platform features, draft documents, brainstorm strategies, or answer virtually any question. Think of it as having a knowledgeable colleague on call 24/7 – one who never takes vacation or needs coffee. From contract templates to case law queries, just ask."
+          ),
+          position: "top",
         },
       ];
 
@@ -428,41 +665,132 @@
         stepNumbersOfLabel: "/",
       });
 
+      // Enhanced step transition function
+      function performSmoothStepTransition(callback) {
+        const tooltip = document.querySelector(".introjs-tooltip");
+        const content = document.querySelector(".custom-intro-content");
+
+        if (tooltip && content) {
+          // Start fade out animation
+          tooltip.classList.add("step-transition-out");
+          content.classList.add("content-fade-out");
+
+          // Wait for fade out to complete, then execute callback
+          setTimeout(() => {
+            callback();
+
+            // Start fade in animation
+            setTimeout(() => {
+              const newTooltip = document.querySelector(".introjs-tooltip");
+              const newContent = document.querySelector(
+                ".custom-intro-content"
+              );
+
+              if (newTooltip && newContent) {
+                newTooltip.classList.remove("step-transition-out");
+                newTooltip.classList.add("step-transition-in");
+                newContent.classList.remove("content-fade-out");
+                newContent.classList.add("content-fade-in");
+
+                // Clean up classes after animation
+                setTimeout(() => {
+                  newTooltip.classList.remove("step-transition-in");
+                }, 500);
+              }
+            }, 50);
+          }, 200);
+        } else {
+          // Fallback if tooltip not found
+          callback();
+        }
+      }
+
+      // Override intro.js navigation for smooth transitions
+      let isTransitioning = false;
+
+      // Store original methods
+      const originalNextStep = intro.nextStep;
+      const originalPreviousStep = intro.previousStep;
+
+      // Enhanced next step with smooth transition
+      intro.nextStep = function () {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        performSmoothStepTransition(() => {
+          originalNextStep.call(this);
+          setTimeout(() => {
+            isTransitioning = false;
+            initializeLottieAnimation();
+          }, 100);
+        });
+      };
+
+      // Enhanced previous step with smooth transition
+      intro.previousStep = function () {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        performSmoothStepTransition(() => {
+          originalPreviousStep.call(this);
+          setTimeout(() => {
+            isTransitioning = false;
+            initializeLottieAnimation();
+          }, 100);
+        });
+      };
+
       // Function to initialize Lottie animation
       function initializeLottieAnimation() {
-        const lottieContainer = document.querySelector(
+        const lottieContainers = document.querySelectorAll(
           ".introjs-tooltip .intro-lottie-container"
         );
 
-        console.log("Lottie container found:", lottieContainer);
+        console.log("Lottie containers found:", lottieContainers.length);
         console.log("Lottie library available:", typeof lottie !== "undefined");
         console.log("Animation data loaded:", !!lottieAnimationData);
 
         if (
-          lottieContainer &&
+          lottieContainers.length > 0 &&
           typeof lottie !== "undefined" &&
           lottieAnimationData
         ) {
-          try {
-            // Clear previous animation
-            lottieContainer.innerHTML = "";
+          lottieContainers.forEach((lottieContainer, index) => {
+            try {
+              // Clear previous animation
+              lottieContainer.innerHTML = "";
 
-            // Create new animation
-            const animation = lottie.loadAnimation({
-              container: lottieContainer,
-              renderer: "svg",
-              loop: true,
-              autoplay: true,
-              animationData: lottieAnimationData,
-            });
+              // Add entrance animation class
+              lottieContainer.classList.add("animate-in");
 
-            console.log("Lottie animation created successfully:", animation);
-          } catch (error) {
-            console.error("Error creating Lottie animation:", error);
-          }
+              // Create new animation
+              const animation = lottie.loadAnimation({
+                container: lottieContainer,
+                renderer: "svg",
+                loop: true,
+                autoplay: true,
+                animationData: lottieAnimationData,
+              });
+
+              // Remove animation class after completion
+              setTimeout(() => {
+                lottieContainer.classList.remove("animate-in");
+              }, 600);
+
+              console.log(
+                `Lottie animation ${index + 1} created successfully:`,
+                animation
+              );
+            } catch (error) {
+              console.error(
+                `Error creating Lottie animation ${index + 1}:`,
+                error
+              );
+            }
+          });
         } else {
           console.warn("Cannot initialize Lottie animation:", {
-            container: !!lottieContainer,
+            containers: lottieContainers.length,
             lottieLibrary: typeof lottie !== "undefined",
             animationData: !!lottieAnimationData,
           });
@@ -471,35 +799,142 @@
 
       // Initialize Lottie animation for all steps - including first step
       intro.onbeforechange(function (targetElement) {
-        const currentStepIndex = intro.getCurrentStep();
-        const currentStep = intro._options.steps[currentStepIndex];
-        console.log("Current step index:", currentStepIndex);
-        console.log("Current step element:", currentStep.element);
-
-        // Custom step-specific logic for advancedMobileUserSteps
-        if (currentStep && currentStep.element) {
-          // For #my-messages-btn and #profile-btn steps on mobile, ensure feedback section is visible
-          if (
-            (currentStep.element === "#my-messages-btn" ||
-              currentStep.element === "#profile-btn") &&
-            isMobileDevice()
-          ) {
-            const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-            if (mobileMenuBtn) {
-              mobileMenuBtn.click();
-            }
-
-            setTimeout(() => {}, 400);
-          }
+        // Add smooth transition class to current tooltip
+        const tooltip = document.querySelector(".introjs-tooltip");
+        if (tooltip) {
+          tooltip.classList.add("step-transition-out");
         }
 
-        // Small delay to ensure tooltip is rendered
-        setTimeout(initializeLottieAnimation, 100);
+        // Return true to allow step change
+        return true;
       });
 
-      // Also initialize on after change for step transitions
+      // Handle mobile menu opening when we reach specific steps
       intro.onafterchange(function (targetElement) {
-        initializeLottieAnimation();
+        const currentStepIndex = intro.getCurrentStep();
+        const currentStep = intro._options.steps[currentStepIndex];
+
+        console.log("After change - Current step index:", currentStepIndex);
+        console.log(
+          "After change - Current step element:",
+          currentStep?.element
+        );
+
+        // Add entrance animation to new tooltip
+        setTimeout(() => {
+          const tooltip = document.querySelector(".introjs-tooltip");
+          const content = document.querySelector(".custom-intro-content");
+
+          if (tooltip) {
+            tooltip.classList.remove("step-transition-out");
+            tooltip.classList.add("step-transition-in");
+
+            // Special handling for feedback section on mobile
+            if (currentStep && currentStep.element === "#feedback-section" && isMobileDevice()) {
+              tooltip.style.position = "fixed";
+              tooltip.style.bottom = "20px";
+              tooltip.style.left = "50%";
+              tooltip.style.transform = "translateX(-50%)";
+              tooltip.style.top = "auto";
+              
+              // Show arrow for feedback section
+              const arrow = tooltip.querySelector(".introjs-arrow");
+              if (arrow) {
+                arrow.style.display = "block";
+                arrow.style.borderTopColor = "#ffe0b6";
+                arrow.style.borderBottomColor = "transparent";
+                arrow.style.borderLeftColor = "transparent";
+                arrow.style.borderRightColor = "transparent";
+              }
+            }
+
+            // Clean up transition classes
+            setTimeout(() => {
+              tooltip.classList.remove("step-transition-in");
+            }, 500);
+          }
+
+          if (content) {
+            content.classList.add("content-fade-in");
+          }
+        }, 50);
+
+        // Check if this is a mobile device and if current step is a mobile step
+        if (currentStep && isMobileDevice()) {
+          const mobileStepElementsWithMenuClick = [
+            "#my-messages-btn",
+            "#profile-btn",
+            "#stats-menu-list",
+          ];
+
+          const allMobileStepElements = [
+            "#stats-menu-list",
+            "#feedback-section-container",
+            "#my-messages-btn",
+            "#ai-rec-section",
+            "#profile-btn",
+            "#ai-bot-btn",
+            "#my-stats-btn-locked",
+            "#c-metrics-button-locked",
+            "#feedback-section",
+            "#locked-ai-rec",
+          ];
+
+          if (allMobileStepElements.includes(currentStep.element)) {
+            console.log(
+              "📱 Mobile step: Now on mobile step, applying mobile logic for:",
+              currentStep.element
+            );
+
+            // Hide the current step temporarily
+            const tooltip = document.querySelector(".introjs-tooltip");
+            const helperLayer = document.querySelector(".introjs-helperLayer");
+            const overlay = document.querySelector(".introjs-overlay");
+
+            if (tooltip) tooltip.style.display = "none";
+            if (helperLayer) helperLayer.style.display = "none";
+            if (overlay) overlay.style.display = "none";
+
+            // Only click mobile menu for specific steps
+            if (mobileStepElementsWithMenuClick.includes(currentStep.element)) {
+              const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+              if (mobileMenuBtn) {
+                console.log(
+                  "📱 Mobile step: Clicking mobile menu button for:",
+                  currentStep.element
+                );
+                mobileMenuBtn.click();
+              } else {
+                console.warn(
+                  "📱 Mobile step: Mobile menu button not found for:",
+                  currentStep.element
+                );
+              }
+            }
+
+            // Wait for UI to settle, then show the step
+            setTimeout(() => {
+              console.log(
+                "📱 Mobile step: Delay completed, showing step for:",
+                currentStep.element
+              );
+
+              if (tooltip) tooltip.style.display = "";
+              if (helperLayer) helperLayer.style.display = "";
+              if (overlay) overlay.style.display = "";
+
+              // Refresh the tour to reposition tooltip
+              intro.refresh();
+              initializeLottieAnimation();
+            }, 500);
+          } else {
+            // For non-mobile steps on mobile device, just initialize Lottie
+            setTimeout(initializeLottieAnimation, 100);
+          }
+        } else {
+          // For all desktop steps, just initialize Lottie
+          setTimeout(initializeLottieAnimation, 100);
+        }
       });
 
       try {
