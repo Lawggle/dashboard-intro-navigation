@@ -11,7 +11,6 @@
   @media (max-width: 768px) {
     .introjs-tooltip {
       min-width: 90vw;
-      max-width: 95vw;
       margin: 0 auto;
     }
 
@@ -45,15 +44,17 @@
 
     /* Make tooltip content more mobile-friendly */
     .custom-intro-content {
-      flex-direction: column;
-      text-align: justify;
-      gap: 15px;
+      flex-direction: row;
+      text-align: left;
+      gap: 10px;
+      align-items: flex-start;
     }
 
-    .intro-lottie-container {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto;
+    .intro-image-container {
+      width: 90px;
+      height: auto;
+      margin: 0;
+      flex-shrink: 0;
     }
   }
   .introjs-tooltiptext {
@@ -64,19 +65,31 @@
     align-items: center;
     gap: 6px;
   }
-  /* Lottie animation container enhancements */
-  .intro-lottie-container {
-    width: 120px;
-    height: 120px;
+  /* Image container enhancements */
+  .intro-image-container {
+    width: 150px;
+    height: auto;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     transform: scale(1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 8px;
   }
 
-  .intro-lottie-container.animate-in {
-    animation: lottieSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  .intro-step-image {
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 6px;
   }
 
-  @keyframes lottieSlideIn {
+  .intro-image-container.animate-in {
+    animation: imageSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  @keyframes imageSlideIn {
     0% {
       transform: scale(0.8) translateY(20px);
       opacity: 0;
@@ -92,9 +105,14 @@
   }
 
   @media (max-width: 768px) {
-    .intro-lottie-container {
-      width: 80px;
-      height: 80px;
+    .intro-image-container {
+      width: 90px;
+      height: auto;
+    }
+
+    .intro-step-image {
+      width: 90px;
+      height: auto;
     }
   }
   .introjs-arrow.right {
@@ -116,6 +134,7 @@
   .introjs-helperNumberLayer {
     position: absolute;
     left: 10px;
+    padding-top: 15px;
     color: #1f1f1f;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     animation: stepNumberBounce 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -139,6 +158,7 @@
   @media (max-width: 768px) {
     .introjs-helperNumberLayer {
       font-size: 12px;
+      padding-top: 10px;
     }
   }
 
@@ -157,13 +177,33 @@
 
   .introjs-button {
     padding: 3px 2px;
-    border: 0px;
+    border: none !important;
+    outline: none !important;
     background-color: #ffe0b6;
     font-weight: 600;
     position: relative;
+    box-shadow: none !important;
   }
   .introjs-button:hover {
     background-color: #ffe0b6;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  .introjs-button:focus {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: #ffe0b6;
+  }
+  .introjs-button:active {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: #ffe0b6;
+  }
+  .introjs-disabled {
+    color: #b9b9b9;
   }
 
   /* 
@@ -183,8 +223,8 @@
   @media (max-width: 768px) {
     .intro-title {
       padding-bottom: 0px;
-      font-size: 20px;
-      text-align: center;
+      font-size: 16px;
+      text-align: left;
     }
   }
 
@@ -212,8 +252,9 @@
 
   @media (max-width: 768px) {
     .intro-description {
-      font-size: 12px;
-      text-align: center;
+      font-size: 10px;
+      line-height: 1.2;
+      text-align: left;
     }
 
     .intro-divider {
@@ -221,81 +262,139 @@
     }
   }
 
-  /* Modern step transition animations */
+  /* Modern step transition animations - Fixed for smooth experience */
   .introjs-tooltip {
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     transform: scale(1);
     opacity: 1;
+    will-change: transform, opacity;
   }
 
-  .introjs-tooltip.step-transition-out {
-    transform: scale(0.95) translateY(-10px);
+  /* Simplified entrance animation */
+  .introjs-tooltip.entering {
+    transform: scale(0.95) translateY(10px);
     opacity: 0;
   }
 
-  .introjs-tooltip.step-transition-in {
-    transform: scale(1.02) translateY(5px);
-    opacity: 0;
-    animation: stepTransitionIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  }
-
-  @keyframes stepTransitionIn {
-    0% {
-      transform: scale(1.02) translateY(5px);
-      opacity: 0;
-    }
-    50% {
-      transform: scale(1.01) translateY(2px);
-      opacity: 0.7;
-    }
-    100% {
-      transform: scale(1) translateY(0);
-      opacity: 1;
-    }
+  .introjs-tooltip.entered {
+    transform: scale(1) translateY(0);
+    opacity: 1;
   }
 
   /* Smooth highlight transitions */
   .introjs-helperLayer {
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
   }
 
-  /* Content fade transitions */
+  /* Synchronized content and background animation */
   .custom-intro-content {
-    transition: opacity 0.3s ease-in-out;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
   }
 
-  .content-fade-out {
+  .introjs-tooltip.entering .custom-intro-content {
     opacity: 0;
+    transform: translateY(8px);
   }
 
-  .content-fade-in {
+  .introjs-tooltip.entered .custom-intro-content {
     opacity: 1;
+    transform: translateY(0);
   }
 
-  /* Button hover effects */
+  /* Modern button hover effects */
   .introjs-button {
-    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     transform: translateY(0);
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    will-change: transform, box-shadow;
   }
 
   .introjs-button:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    border: none !important;
+    outline: none !important;
   }
 
   .introjs-button:active {
     transform: translateY(0);
-    transition: all 0.1s ease;
+    transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
   }
 
-  /* Progress indicator animation */
+  .introjs-button:focus {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Enhanced next button styling */
+  .introjs-button.introjs-nextbutton:focus,
+  .introjs-button.introjs-nextbutton:hover {
+    background-color: #ffe0b6 !important;
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 2px 8px rgba(255, 216, 155, 0.3) !important;
+    font-weight: 700;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .introjs-button.introjs-nextbutton:active {
+    background-color: #ffe0b6 !important;
+    transform: translateY(0) scale(1);
+    box-shadow: 0 1px 4px rgba(255, 216, 155, 0.2) !important;
+    transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Enhanced previous button styling to match next button */
+  .introjs-button.introjs-prevbutton:focus,
+  .introjs-button.introjs-prevbutton:hover {
+    background-color: #ffe0b6 !important;
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 2px 8px rgba(255, 216, 155, 0.3) !important;
+    font-weight: 700;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .introjs-button.introjs-prevbutton:active {
+    background-color: #ffe0b6 !important;
+    transform: translateY(0) scale(1);
+    box-shadow: 0 1px 4px rgba(255, 216, 155, 0.2) !important;
+    transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Modern progress and overlay transitions */
   .introjs-progress {
-    transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Overlay smooth transitions */
   .introjs-overlay {
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Ensure tooltip content can scroll if needed */
+  .introjs-tooltiptext {
+    overflow-y: auto !important;
+    max-height: 70vh !important;
+  }
+
+  .introjs-tooltip-header {
+    display: none;
+  }
+
+  .introjs-tooltiptext {
+    padding-top: 10px;
+  }
+
+  @media (min-width: 1024px) {
+    .introjs-tooltiptext {
+      padding-top: 15px;
+    }
   }
 </style>
 
@@ -336,27 +435,32 @@
 
       console.log("✅ Initializing tour for new user");
 
-      // Pre-load Lottie animation data
-      let lottieAnimationData = null;
+      // Define images for each step
+      const stepImages = {
+        "my-stats":
+          "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/688e4035f058589e135b8874_Stats%20page.png",
+        "competitive-metrics":
+          "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/688f7ee00d7d3716ec0065c5_competetive%20metrics-croped.png",
+        messages:
+          "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/688e4033961d84e358819cb2_my%20messages.png",
+        profile:
+          "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/688f7ee0927aeb9c32ab95d0_Profile%20Page-croped.png",
+        feedback:
+          "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/688f7ee0a6dad7659ee4eba9_feedback-croped.png",
+        "ai-recommendations":
+          "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/688f8097a1a40ca73fb2b700_ai%20recommendations-croped2.png",
+        "ai-assistant":
+          "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/688e4035a43ec70b8fa34d43_AI%20assistant.png",
+      };
 
-      // Load animation JSON once
-      fetch(
-        "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/6836fc39d91ffe6feec2f253_data5.json"
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          lottieAnimationData = data;
-        })
-        .catch((error) => {
-          console.error("Error loading Lottie animation:", error);
-        });
-
-      // Helper function to create intro content with Lottie
-      function createIntroContent(title, description) {
+      // Helper function to create intro content with image
+      function createIntroContent(title, description, imageKey) {
         return `
           <div class="custom-intro-content">
-            <div class="lottie-side">
-              <div class="intro-lottie-container"></div>
+            <div class="image-side">
+              <div class="intro-image-container">
+                <img src="${stepImages[imageKey]}" alt="${title}" class="intro-step-image" />
+              </div>
             </div>
             <div class="content-side">
               <h3 class="intro-title">${title}</h3>
@@ -372,8 +476,12 @@
           .map(
             (section) => `
           <div class="custom-intro-content">
-            <div class="lottie-side">
-              <div class="intro-lottie-container"></div>
+            <div class="image-side">
+              <div class="intro-image-container">
+                <img src="${stepImages[section.imageKey]}" alt="${
+              section.title
+            }" class="intro-step-image" />
+              </div>
             </div>
             <div class="content-side">
               <h3 class="intro-title">${section.title}</h3>
@@ -404,7 +512,8 @@
           element: "#my-stats-btn",
           intro: createIntroContent(
             "My Statistics",
-            "Your personal performance dashboard. Track your response times, conversion rates, and other key metrics that matter. Consider it your practice's vital signs – because you can't improve what you don't measure."
+            "Your personal performance dashboard. Track your response times, conversion rates, and other key metrics that matter. Consider it your practice's vital signs – because you can't improve what you don't measure.",
+            "my-stats"
           ),
           position: "right",
         },
@@ -412,7 +521,8 @@
           element: "#c-metrics-button",
           intro: createIntroContent(
             "Competitive Metrics",
-            "Where you see how you measure up against opposing counsel (on the platform, that is). Consider this your performance review against the competition. Nothing motivates quite like seeing exactly where you rank in the pecking order. Time to raise the bar."
+            "Where you see how you measure up against opposing counsel (on the platform, that is). Consider this your performance review against the competition. Nothing motivates quite like seeing exactly where you rank in the pecking order. Time to raise the bar.",
+            "competitive-metrics"
           ),
           position: "right",
         },
@@ -420,7 +530,8 @@
           element: "#my-messages-btn",
           intro: createIntroContent(
             "My Messages",
-            "Where potential clients become actual clients. This is your direct line to every lead – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count."
+            "Where potential clients become actual clients. This is your direct line to every lead – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count.",
+            "messages"
           ),
           position: "right",
         },
@@ -428,7 +539,8 @@
           element: "#profile-btn",
           intro: createIntroContent(
             "Profile Settings Page",
-            "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice."
+            "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice.",
+            "profile"
           ),
           position: "right",
         },
@@ -436,7 +548,8 @@
           element: "#feedback-section",
           intro: createIntroContent(
             "Feedback",
-            "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief."
+            "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief.",
+            "feedback"
           ),
           position: "left",
         },
@@ -444,7 +557,8 @@
           element: "#ai-rec-section",
           intro: createIntroContent(
             "AI Recommendations",
-            "Your personalized practice improvement plan, refreshed every 5 days. Our AI reviews your profile like opposing counsel would – finding every gap and weak point. Complete these suggestions to boost your profile strength score and completion percentage. Note: changes won't reflect immediately; think of it as a 5-day review period. The higher your score, the more compelling your case to potential clients."
+            "Your personalized practice improvement plan, refreshed every 5 days. Our AI reviews your profile like opposing counsel would – finding every gap and weak point. Complete these suggestions to boost your profile strength score and completion percentage. Note: changes won't reflect immediately; think of it as a 5-day review period. The higher your score, the more compelling your case to potential clients.",
+            "ai-recommendations"
           ),
           position: "top",
         },
@@ -452,9 +566,10 @@
           element: "#ai-bot-btn",
           intro: createIntroContent(
             "AI Assistant",
-            "Your digital associate, minus the billable hours. While it can't access your dashboard data, it can guide you through platform features, draft documents, brainstorm strategies, or answer virtually any question. Think of it as having a knowledgeable colleague on call 24/7 – one who never takes vacation or needs coffee. From contract templates to case law queries, just ask."
+            "Your digital associate, minus the billable hours. While it can't access your dashboard data, it can guide you through platform features, draft documents, brainstorm strategies, or answer virtually any question. Think of it as having a knowledgeable colleague on call 24/7 – one who never takes vacation or needs coffee. From contract templates to case law queries, just ask.",
+            "ai-assistant"
           ),
-          position: "left",
+          position: "top",
         },
       ];
 
@@ -466,11 +581,13 @@
               title: "My Statistics",
               description:
                 "Your personal performance dashboard. Track your response times, conversion rates, and other key metrics that matter. Consider it your practice's vital signs – because you can't improve what you don't measure.",
+              imageKey: "my-stats",
             },
             {
               title: "Competitive Metrics",
               description:
                 "Where you see how you measure up against opposing counsel (on the platform, that is). Consider this your performance review against the competition. Nothing motivates quite like seeing exactly where you rank in the pecking order. Time to raise the bar.",
+              imageKey: "competitive-metrics",
             },
           ]),
           position: "bottom",
@@ -479,15 +596,19 @@
           element: "#feedback-section",
           intro: createIntroContent(
             "Feedback",
-            "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief."
+            "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief.",
+            "feedback"
           ),
-          position: "top",
+          position: "bottom",
+          scrollTo: "tooltip",
+          disableInteraction: true,
         },
         {
           element: "#my-messages-btn",
           intro: createIntroContent(
             "My Messages",
-            "Where potential clients become actual clients. This is your direct line to every lead – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count."
+            "Where potential clients become actual clients. This is your direct line to every lead – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count.",
+            "messages"
           ),
           position: "bottom",
         },
@@ -495,23 +616,19 @@
           element: "#ai-rec-section",
           intro: createIntroContent(
             "AI Recommendations",
-            // beforeStep removed; logic moved to onbeforechange
-            "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice."
+            "Your personalized practice improvement plan, refreshed every 5 days. Our AI reviews your profile like opposing counsel would – finding every gap and weak point. Complete these suggestions to boost your profile strength score and completion percentage. Note: changes won't reflect immediately; think of it as a 5-day review period. The higher your score, the more compelling your case to potential clients.",
+            "ai-recommendations"
           ),
           position: "top",
-          beforeStep: () => {
-            // Ensure feedback section is visible
-            const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-            if (mobileMenuBtn) {
-              mobileMenuBtn.click();
-            }
-          },
+          scrollTo: "tooltip",
+          disableInteraction: true,
         },
         {
           element: "#profile-btn",
           intro: createIntroContent(
             "Profile Settings Page",
-            "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice."
+            "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice.",
+            "profile"
           ),
           position: "bottom",
         },
@@ -519,9 +636,10 @@
           element: "#ai-bot-btn",
           intro: createIntroContent(
             "AI Assistant",
-            "Your digital associate, minus the billable hours. While it can't access your dashboard data, it can guide you through platform features, draft documents, brainstorm strategies, or answer virtually any question. Think of it as having a knowledgeable colleague on call 24/7 – one who never takes vacation or needs coffee. From contract templates to case law queries, just ask."
+            "Your digital associate, minus the billable hours. While it can't access your dashboard data, it can guide you through platform features, draft documents, brainstorm strategies, or answer virtually any question. Think of it as having a knowledgeable colleague on call 24/7 – one who never takes vacation or needs coffee. From contract templates to case law queries, just ask.",
+            "ai-assistant"
           ),
-          position: "top",
+          position: "left",
         },
       ];
 
@@ -530,7 +648,8 @@
           element: "#my-stats-btn-locked",
           intro: createIntroContent(
             "My Stats",
-            "Your personal performance dashboard. Track your response times, conversion rates, and other key metrics that matter. Consider it your practice's vital signs – because you can't improve what you don't measure. Time to see the evidence of your efforts."
+            "Your personal performance dashboard. Track your response times, conversion rates, and other key metrics that matter. Consider it your practice's vital signs – because you can't improve what you don't measure. Time to see the evidence of your efforts.",
+            "my-stats"
           ),
           position: "right",
         },
@@ -538,7 +657,8 @@
           element: "#c-metrics-button-locked",
           intro: createIntroContent(
             "Competitive Metrics",
-            "Where you see how you measure up against opposing counsel (on the platform, that is). Consider this your performance review against the competition. Nothing motivates quite like seeing exactly where you rank in the pecking order. Time to raise the bar."
+            "Where you see how you measure up against opposing counsel (on the platform, that is). Consider this your performance review against the competition. Nothing motivates quite like seeing exactly where you rank in the pecking order. Time to raise the bar.",
+            "competitive-metrics"
           ),
           position: "right",
         },
@@ -546,7 +666,8 @@
           element: "#my-messages-btn",
           intro: createIntroContent(
             "My Messages",
-            "Where potential clients become actual clients. This is your direct line to every lead – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count."
+            "Where potential clients become actual clients. This is your direct line to every lead – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count.",
+            "messages"
           ),
           position: "right",
         },
@@ -554,7 +675,8 @@
           element: "#profile-btn",
           intro: createIntroContent(
             "Profile Settings Page",
-            "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice."
+            "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice.",
+            "profile"
           ),
           position: "right",
         },
@@ -562,15 +684,17 @@
           element: "#feedback-section",
           intro: createIntroContent(
             "Feedback",
-            "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief."
+            "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief.",
+            "feedback"
           ),
-          position: "left",
+          position: "bottom",
         },
         {
           element: "#locked-ai-rec",
           intro: createIntroContent(
             "AI Recommendations",
-            "Your personalized practice improvement plan, refreshed every 5 days. Our AI reviews your profile like opposing counsel would – finding every gap and weak point. Complete these suggestions to boost your profile strength score and completion percentage. Note: changes won't reflect immediately; think of it as a 5-day review period. The higher your score, the more compelling your case to potential clients."
+            "Your personalized practice improvement plan, refreshed every 5 days. Our AI reviews your profile like opposing counsel would – finding every gap and weak point. Complete these suggestions to boost your profile strength score and completion percentage. Note: changes won't reflect immediately; think of it as a 5-day review period. The higher your score, the more compelling your case to potential clients.",
+            "ai-recommendations"
           ),
           position: "top",
         },
@@ -578,9 +702,10 @@
           element: "#ai-bot-btn",
           intro: createIntroContent(
             "AI Assistant",
-            "Your digital associate, minus the billable hours. While it can't access your dashboard data, it can guide you through platform features, draft documents, brainstorm strategies, or answer virtually any question. Think of it as having a knowledgeable colleague on call 24/7 – one who never takes vacation or needs coffee. From contract templates to case law queries, just ask."
+            "Your digital associate, minus the billable hours. While it can't access your dashboard data, it can guide you through platform features, draft documents, brainstorm strategies, or answer virtually any question. Think of it as having a knowledgeable colleague on call 24/7 – one who never takes vacation or needs coffee. From contract templates to case law queries, just ask.",
+            "ai-assistant"
           ),
-          position: "left",
+          position: "top",
         },
       ];
 
@@ -592,11 +717,13 @@
               title: "My Statistics",
               description:
                 "Your personal performance dashboard. Track your response times, conversion rates, and other key metrics that matter. Consider it your practice's vital signs – because you can't improve what you don't measure.",
+              imageKey: "my-stats",
             },
             {
               title: "Competitive Metrics",
               description:
                 "Where you see how you measure up against opposing counsel (on the platform, that is). Consider this your performance review against the competition. Nothing motivates quite like seeing exactly where you rank in the pecking order. Time to raise the bar.",
+              imageKey: "competitive-metrics",
             },
           ]),
           position: "bottom",
@@ -605,7 +732,8 @@
           element: "#feedback-section",
           intro: createIntroContent(
             "Feedback",
-            "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief."
+            "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief.",
+            "feedback"
           ),
           position: "top",
         },
@@ -613,7 +741,8 @@
           element: "#my-messages-btn",
           intro: createIntroContent(
             "My Messages",
-            "Where potential clients become actual clients. This is your direct line to every lead – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count."
+            "Where potential clients become actual clients. This is your direct line to every lead – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count.",
+            "messages"
           ),
           position: "bottom",
         },
@@ -622,7 +751,8 @@
           intro: createIntroContent(
             "AI Recommendations",
             // beforeStep removed; logic moved to onbeforechange
-            "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice."
+            "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice.",
+            "ai-recommendations"
           ),
           position: "top",
           beforeStep: () => {
@@ -637,7 +767,8 @@
           element: "#profile-btn",
           intro: createIntroContent(
             "Profile Settings Page",
-            "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice."
+            "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice.",
+            "profile"
           ),
           position: "bottom",
         },
@@ -645,9 +776,10 @@
           element: "#ai-bot-btn",
           intro: createIntroContent(
             "AI Assistant",
-            "Your digital associate, minus the billable hours. While it can't access your dashboard data, it can guide you through platform features, draft documents, brainstorm strategies, or answer virtually any question. Think of it as having a knowledgeable colleague on call 24/7 – one who never takes vacation or needs coffee. From contract templates to case law queries, just ask."
+            "Your digital associate, minus the billable hours. While it can't access your dashboard data, it can guide you through platform features, draft documents, brainstorm strategies, or answer virtually any question. Think of it as having a knowledgeable colleague on call 24/7 – one who never takes vacation or needs coffee. From contract templates to case law queries, just ask.",
+            "ai-assistant"
           ),
-          position: "top",
+          position: "left",
         },
       ];
 
@@ -659,46 +791,46 @@
         showProgress: false,
         showBullets: false,
         exitOnOverlayClick: false,
-        exitOnEsc: true,
+        exitOnEsc: false,
         disableInteraction: true,
         showStepNumbers: true,
         stepNumbersOfLabel: "/",
+        scrollPadding: 0,
+        keyboardNavigation: false,
       });
 
-      // Enhanced step transition function
+      // Modern smooth step transition function
       function performSmoothStepTransition(callback) {
         const tooltip = document.querySelector(".introjs-tooltip");
-        const content = document.querySelector(".custom-intro-content");
 
-        if (tooltip && content) {
-          // Start fade out animation
-          tooltip.classList.add("step-transition-out");
-          content.classList.add("content-fade-out");
+        if (tooltip) {
+          // Start exit animation
+          tooltip.classList.add("entering");
 
-          // Wait for fade out to complete, then execute callback
+          // Execute callback after exit animation
           setTimeout(() => {
             callback();
 
-            // Start fade in animation
+            // Initialize entrance animation for new step
             setTimeout(() => {
               const newTooltip = document.querySelector(".introjs-tooltip");
-              const newContent = document.querySelector(
-                ".custom-intro-content"
-              );
+              if (newTooltip) {
+                // Ensure entering state
+                newTooltip.classList.add("entering");
 
-              if (newTooltip && newContent) {
-                newTooltip.classList.remove("step-transition-out");
-                newTooltip.classList.add("step-transition-in");
-                newContent.classList.remove("content-fade-out");
-                newContent.classList.add("content-fade-in");
+                // Trigger entrance animation
+                requestAnimationFrame(() => {
+                  newTooltip.classList.remove("entering");
+                  newTooltip.classList.add("entered");
 
-                // Clean up classes after animation
-                setTimeout(() => {
-                  newTooltip.classList.remove("step-transition-in");
-                }, 500);
+                  // Clean up after animation
+                  setTimeout(() => {
+                    newTooltip.classList.remove("entered");
+                  }, 300);
+                });
               }
-            }, 50);
-          }, 200);
+            }, 20);
+          }, 300);
         } else {
           // Fallback if tooltip not found
           callback();
@@ -721,7 +853,7 @@
           originalNextStep.call(this);
           setTimeout(() => {
             isTransitioning = false;
-            initializeLottieAnimation();
+            initializeStepImages();
           }, 100);
         });
       };
@@ -735,74 +867,67 @@
           originalPreviousStep.call(this);
           setTimeout(() => {
             isTransitioning = false;
-            initializeLottieAnimation();
+            initializeStepImages();
           }, 100);
         });
       };
 
-      // Function to initialize Lottie animation
-      function initializeLottieAnimation() {
-        const lottieContainers = document.querySelectorAll(
-          ".introjs-tooltip .intro-lottie-container"
+      // Function to initialize step images
+      function initializeStepImages() {
+        const imageContainers = document.querySelectorAll(
+          ".introjs-tooltip .intro-image-container"
         );
 
-        console.log("Lottie containers found:", lottieContainers.length);
-        console.log("Lottie library available:", typeof lottie !== "undefined");
-        console.log("Animation data loaded:", !!lottieAnimationData);
+        console.log("Image containers found:", imageContainers.length);
 
-        if (
-          lottieContainers.length > 0 &&
-          typeof lottie !== "undefined" &&
-          lottieAnimationData
-        ) {
-          lottieContainers.forEach((lottieContainer, index) => {
+        if (imageContainers.length > 0) {
+          imageContainers.forEach((imageContainer, index) => {
             try {
-              // Clear previous animation
-              lottieContainer.innerHTML = "";
-
               // Add entrance animation class
-              lottieContainer.classList.add("animate-in");
+              imageContainer.classList.add("animate-in");
 
-              // Create new animation
-              const animation = lottie.loadAnimation({
-                container: lottieContainer,
-                renderer: "svg",
-                loop: true,
-                autoplay: true,
-                animationData: lottieAnimationData,
-              });
+              // Find the image inside the container
+              const image = imageContainer.querySelector(".intro-step-image");
+              if (image) {
+                // Add loading event listener
+                image.addEventListener("load", () => {
+                  console.log(`Step image ${index + 1} loaded successfully`);
+                });
+
+                image.addEventListener("error", () => {
+                  console.error(
+                    `Error loading step image ${index + 1}:`,
+                    image.src
+                  );
+                  // You can add a fallback image here if needed
+                  // image.src = 'path/to/fallback-image.png';
+                });
+              }
 
               // Remove animation class after completion
               setTimeout(() => {
-                lottieContainer.classList.remove("animate-in");
+                imageContainer.classList.remove("animate-in");
               }, 600);
 
-              console.log(
-                `Lottie animation ${index + 1} created successfully:`,
-                animation
-              );
+              console.log(`Step image ${index + 1} initialized successfully`);
             } catch (error) {
               console.error(
-                `Error creating Lottie animation ${index + 1}:`,
+                `Error initializing step image ${index + 1}:`,
                 error
               );
             }
           });
         } else {
-          console.warn("Cannot initialize Lottie animation:", {
-            containers: lottieContainers.length,
-            lottieLibrary: typeof lottie !== "undefined",
-            animationData: !!lottieAnimationData,
-          });
+          console.warn("No image containers found in current step");
         }
       }
 
-      // Initialize Lottie animation for all steps - including first step
+      // Initialize step images for all steps - including first step
       intro.onbeforechange(function (targetElement) {
-        // Add smooth transition class to current tooltip
+        // Prepare for smooth transition
         const tooltip = document.querySelector(".introjs-tooltip");
         if (tooltip) {
-          tooltip.classList.add("step-transition-out");
+          tooltip.classList.remove("entered");
         }
 
         // Return true to allow step change
@@ -820,48 +945,46 @@
           currentStep?.element
         );
 
-        // Add entrance animation to new tooltip
-        setTimeout(() => {
-          const tooltip = document.querySelector(".introjs-tooltip");
-          const content = document.querySelector(".custom-intro-content");
+        // Apply entrance animation to new tooltip
+        const tooltip = document.querySelector(".introjs-tooltip");
+        if (tooltip) {
+          // Start with entering state
+          tooltip.classList.add("entering");
 
-          if (tooltip) {
-            tooltip.classList.remove("step-transition-out");
-            tooltip.classList.add("step-transition-in");
+          // Trigger smooth entrance
+          requestAnimationFrame(() => {
+            tooltip.classList.remove("entering");
+            tooltip.classList.add("entered");
 
-            // Special handling for feedback section on mobile
-            if (
-              currentStep &&
-              currentStep.element === "#feedback-section" &&
-              isMobileDevice()
-            ) {
-              tooltip.style.position = "fixed";
-              tooltip.style.bottom = "20px";
-              tooltip.style.left = "50%";
-              tooltip.style.transform = "translateX(-50%)";
-              tooltip.style.top = "auto";
-
-              // Show arrow for feedback section
-              const arrow = tooltip.querySelector(".introjs-arrow");
-              if (arrow) {
-                arrow.style.display = "block";
-                arrow.style.borderTopColor = "#ffe0b6";
-                arrow.style.borderBottomColor = "transparent";
-                arrow.style.borderLeftColor = "transparent";
-                arrow.style.borderRightColor = "transparent";
-              }
-            }
-
-            // Clean up transition classes
+            // Clean up after animation
             setTimeout(() => {
-              tooltip.classList.remove("step-transition-in");
-            }, 500);
-          }
+              tooltip.classList.remove("entered");
+            }, 300);
+          });
 
-          if (content) {
-            content.classList.add("content-fade-in");
+          // Special handling for feedback section on mobile
+          if (
+            currentStep &&
+            currentStep.element === "#feedback-section" &&
+            isMobileDevice()
+          ) {
+            tooltip.style.position = "fixed";
+            tooltip.style.bottom = "20px";
+            tooltip.style.left = "50%";
+            tooltip.style.transform = "translateX(-50%)";
+            tooltip.style.top = "auto";
+
+            // Show arrow for feedback section
+            const arrow = tooltip.querySelector(".introjs-arrow");
+            if (arrow) {
+              arrow.style.display = "block";
+              arrow.style.borderTopColor = "#ffe0b6";
+              arrow.style.borderBottomColor = "transparent";
+              arrow.style.borderLeftColor = "transparent";
+              arrow.style.borderRightColor = "transparent";
+            }
           }
-        }, 50);
+        }
 
         // Check if this is a mobile device and if current step is a mobile step
         if (currentStep && isMobileDevice()) {
@@ -929,15 +1052,15 @@
 
               // Refresh the tour to reposition tooltip
               intro.refresh();
-              initializeLottieAnimation();
-            }, 500);
+              initializeStepImages();
+            }, 700);
           } else {
-            // For non-mobile steps on mobile device, just initialize Lottie
-            setTimeout(initializeLottieAnimation, 100);
+            // For non-mobile steps on mobile device, just initialize images
+            setTimeout(initializeStepImages, 100);
           }
         } else {
-          // For all desktop steps, just initialize Lottie
-          setTimeout(initializeLottieAnimation, 100);
+          // For all desktop steps, just initialize images
+          setTimeout(initializeStepImages, 100);
         }
       });
 
@@ -997,9 +1120,72 @@
       setTimeout(() => {
         // Start tour using the same configured instance
         intro.start();
+
+        // Prevent scrolling for all devices (wheel, touch, etc.)
+        document.addEventListener("wheel", preventWheelScroll, {
+          passive: false,
+        });
+        document.addEventListener("DOMMouseScroll", preventWheelScroll, {
+          passive: false,
+        }); // Firefox
+        // Only prevent touchmove (scrolling), allow touchstart/touchend (tapping)
+        document.addEventListener("touchmove", preventTouchScroll, {
+          passive: false,
+        });
       }, 4000);
 
+      // Function to prevent wheel scrolling
+      function preventWheelScroll(e) {
+        // Only prevent if intro is active and not scrolling within tooltip
+        if (document.querySelector(".introjs-overlay")) {
+          const tooltip = document.querySelector(".introjs-tooltip");
+          const tooltipText = document.querySelector(".introjs-tooltiptext");
+
+          // Allow scrolling if the wheel event is within the tooltip content
+          if (tooltip && tooltip.contains(e.target)) {
+            // Check if tooltip content is scrollable
+            if (
+              tooltipText &&
+              tooltipText.scrollHeight > tooltipText.clientHeight
+            ) {
+              return; // Allow scrolling within tooltip
+            }
+          }
+
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }
+
+      // Function to prevent touch scrolling/swiping
+      function preventTouchScroll(e) {
+        // Only prevent if intro is active and not touching within tooltip
+        if (document.querySelector(".introjs-overlay")) {
+          const tooltip = document.querySelector(".introjs-tooltip");
+          const tooltipText = document.querySelector(".introjs-tooltiptext");
+
+          // Allow touch scrolling if the touch event is within the tooltip content
+          if (tooltip && tooltip.contains(e.target)) {
+            // Check if tooltip content is scrollable
+            if (
+              tooltipText &&
+              tooltipText.scrollHeight > tooltipText.clientHeight
+            ) {
+              return; // Allow scrolling within tooltip
+            }
+          }
+
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }
+
       intro.oncomplete(() => {
+        // Remove scroll prevention for all devices
+        document.removeEventListener("wheel", preventWheelScroll);
+        document.removeEventListener("DOMMouseScroll", preventWheelScroll);
+        document.removeEventListener("touchmove", preventTouchScroll);
+
         const memberstack = window.$memberstackDom;
 
         // memberstack.getCurrentMember().then(async ({ data: member }) => {
@@ -1022,6 +1208,11 @@
       });
 
       intro.onexit(() => {
+        // Remove scroll prevention for all devices
+        document.removeEventListener("wheel", preventWheelScroll);
+        document.removeEventListener("DOMMouseScroll", preventWheelScroll);
+        document.removeEventListener("touchmove", preventTouchScroll);
+
         const memberstack = window.$memberstackDom;
 
         // memberstack.getCurrentMember().then(async ({ data: member }) => {
