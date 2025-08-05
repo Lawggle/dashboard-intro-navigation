@@ -224,6 +224,9 @@
 }
 
 .custom-shepherd-step {
+  max-width: 95vw !important;
+}
+.custom-shepherd-step {
   @media (min-width: 1024px) {
     max-width: 600px !important;
   }

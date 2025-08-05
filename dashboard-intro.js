@@ -502,7 +502,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ),
         attachTo: {
           element: "#ai-rec-section",
-          on: "bottom",
+          on: "top",
         },
         floatingUIOptions: {
           middleware: [
