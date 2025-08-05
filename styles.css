@@ -243,7 +243,11 @@
 }
 
 @media (min-width: 1024px) {
-  .shepherd-element.feedback-step-wide {
+  .feedback-step-wide {
     width: 650px !important;
   }
+}
+
+.orgo-chatbot-button.shepherd-enabled.shepherd-target {
+  border-radius: 50% !important;
 }

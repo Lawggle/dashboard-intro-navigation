@@ -476,11 +476,11 @@ document.addEventListener("DOMContentLoaded", function () {
         ),
         attachTo: {
           element: "#ai-rec-section",
-          on: "bottom",
+          on: "top",
         },
         floatingUIOptions: {
           middleware: [
-            offset({ mainAxis: -64, crossAxis: 0 }),
+            offset({ mainAxis: 64, crossAxis: 0 }),
             // Removed shift middleware and kept only offset
           ],
         },
@@ -705,7 +705,7 @@ document.addEventListener("DOMContentLoaded", function () {
           element: "#feedback-section",
           on: "bottom",
         },
-        classes: "custom-shepherd-step feedback-step-wide",
+        classes: "feedback-step-wide",
         floatingUIOptions: {
           middleware: [
             offset({ mainAxis: 16, crossAxis: 0 }),
