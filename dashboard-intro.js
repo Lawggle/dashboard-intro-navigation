@@ -259,6 +259,7 @@ document.addEventListener("DOMContentLoaded", function () {
           element: "#feedback-section",
           on: "auto",
         },
+        classes: "custom-shepherd-step feedback-step-wide",
         buttons: [
           {
             text: "← Back",
@@ -704,6 +705,7 @@ document.addEventListener("DOMContentLoaded", function () {
           element: "#feedback-section",
           on: "bottom",
         },
+        classes: "custom-shepherd-step feedback-step-wide",
         floatingUIOptions: {
           middleware: [
             offset({ mainAxis: 16, crossAxis: 0 }),

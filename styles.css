@@ -61,6 +61,7 @@
   transition: opacity 0.3s ease-in-out;
   position: relative;
   z-index: 1;
+  background-color: #ffe0b6;
 }
 
 .intro-step-image.loaded {
@@ -238,5 +239,11 @@
 @media (max-width: 768px) {
   .custom-step-counter {
     font-size: 12px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .shepherd-element.feedback-step-wide {
+    width: 650px !important;
   }
 }
