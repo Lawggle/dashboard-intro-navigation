@@ -1290,6 +1290,14 @@ document.addEventListener("DOMContentLoaded", function () {
             crossAxis: true,
           })
         );
+      } else {
+        middleware.push(
+          shift({
+            padding: 10, // Space from viewport edges in pixels
+            limiter: limitShift(),
+            crossAxis: true,
+          })
+        );
       }
 
       return { middleware };
