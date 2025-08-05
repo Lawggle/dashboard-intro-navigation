@@ -1328,21 +1328,27 @@ document.addEventListener("DOMContentLoaded", function () {
                     );
                   }
                   tour.addStep(step);
-                });
 
                 // Set up event handlers with smooth transitions
                 tour.on("show", (event) => {
                   console.log("Step shown:", event.step.id);
-                  // Slight delay for smoother transitions
-                  setTimeout(initializeStepImages, 150);
-                });
 
-                tour.on("hide", (event) => {
-                  // Add smooth exit transition
-                  const tooltip = document.querySelector(".shepherd-element");
-                  if (tooltip) {
-                    tooltip.style.transition = "all 0.2s ease-out";
-                  }
+                  // Check if this step requires mobile menu opening
+                  const stepElement = event.step.options.attachTo?.element;
+                  const mobileStepElementsWithMenuClick = [
+                    "#my-messages-btn",
+                    "#profile-btn",
+                    "#stats-menu-list",
+                  ];
+
+                  const needsMobileMenu =
+                    isMobileDevice() &&
+                    mobileStepElementsWithMenuClick.includes(stepElement);
+
+                  // Delay image initialization based on whether mobile menu needs to open
+                  const imageInitDelay = needsMobileMenu ? 750 : 150; // 750ms for mobile menu steps, 150ms for others
+
+                  setTimeout(initializeStepImages, imageInitDelay);
                 });
 
                 // Preload images before starting tour
