@@ -1362,7 +1362,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 tour.on("show", (event) => {
                   console.log("Step shown:", event.step.id);
 
-                  // Increase z-index for AI rec sections if this is their step
+                  // Reset all AI rec sections first (cleanup from previous steps)
+                  manageAIRecZIndex("", "reset");
+
+                  // Then increase z-index for AI rec sections if this is their step
                   manageAIRecZIndex(event.step.id, "increase");
 
                   // Check if this step requires mobile menu opening
@@ -1381,12 +1384,6 @@ document.addEventListener("DOMContentLoaded", function () {
                   const imageInitDelay = needsMobileMenu ? 750 : 150; // 750ms for mobile menu steps, 150ms for others
 
                   setTimeout(initializeStepImages, imageInitDelay);
-                });
-
-                // Add event handler to reset z-index when leaving steps
-                tour.on("hide", (event) => {
-                  // Reset z-index when leaving any step
-                  manageAIRecZIndex(event.step.id, "reset");
                 });
 
                 // Preload images before starting tour
@@ -1454,6 +1451,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 tour.on("complete", () => {
                   console.log("Tour completed");
+
+                  // Reset z-index for AI rec sections when tour completes
+                  manageAIRecZIndex("", "reset");
+
                   // Remove scroll prevention
                   document.removeEventListener("wheel", preventWheelScroll);
                   document.removeEventListener(
@@ -1479,6 +1480,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 tour.on("cancel", () => {
                   console.log("Tour cancelled");
+
+                  // Reset z-index for AI rec sections when tour is cancelled
+                  manageAIRecZIndex("", "reset");
+
                   // Remove scroll prevention
                   document.removeEventListener("wheel", preventWheelScroll);
                   document.removeEventListener(
