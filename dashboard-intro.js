@@ -1328,6 +1328,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     );
                   }
                   tour.addStep(step);
+                });
 
                 // Set up event handlers with smooth transitions
                 tour.on("show", (event) => {
