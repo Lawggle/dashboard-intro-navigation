@@ -117,6 +117,32 @@ document.addEventListener("DOMContentLoaded", function () {
       return sectionsHtml;
     }
 
+    // Helper function to manage z-index for AI recommendation sections
+    function manageAIRecZIndex(stepId, action) {
+      const aiRecElements = ["#ai-rec-section", "#locked-ai-rec"];
+
+      aiRecElements.forEach((selector) => {
+        const element = document.querySelector(selector);
+        if (element) {
+          if (
+            action === "increase" &&
+            (stepId === "ai-recommendations" ||
+              stepId === "ai-recommendations-locked" ||
+              stepId === "ai-recommendations-mobile" ||
+              stepId === "ai-recommendations-essential-mobile")
+          ) {
+            element.style.zIndex = "99999";
+            console.log(
+              `Increased z-index for ${selector} during step: ${stepId}`
+            );
+          } else if (action === "reset") {
+            element.style.zIndex = "auto";
+            console.log(`Reset z-index for ${selector} after step: ${stepId}`);
+          }
+        }
+      });
+    }
+
     // Click dashboard button to start in the right section
     const dashboardBtn = document.getElementById("dashboard-btn");
     if (dashboardBtn) {
@@ -476,11 +502,11 @@ document.addEventListener("DOMContentLoaded", function () {
         ),
         attachTo: {
           element: "#ai-rec-section",
-          on: "top",
+          on: "bottom",
         },
         floatingUIOptions: {
           middleware: [
-            offset({ mainAxis: 64, crossAxis: 0 }),
+            offset({ mainAxis: -64, crossAxis: 0 }),
             // Removed shift middleware and kept only offset
           ],
         },
@@ -1336,6 +1362,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 tour.on("show", (event) => {
                   console.log("Step shown:", event.step.id);
 
+                  // Increase z-index for AI rec sections if this is their step
+                  manageAIRecZIndex(event.step.id, "increase");
+
                   // Check if this step requires mobile menu opening
                   const stepElement = event.step.options.attachTo?.element;
                   const mobileStepElementsWithMenuClick = [
@@ -1352,6 +1381,12 @@ document.addEventListener("DOMContentLoaded", function () {
                   const imageInitDelay = needsMobileMenu ? 750 : 150; // 750ms for mobile menu steps, 150ms for others
 
                   setTimeout(initializeStepImages, imageInitDelay);
+                });
+
+                // Add event handler to reset z-index when leaving steps
+                tour.on("hide", (event) => {
+                  // Reset z-index when leaving any step
+                  manageAIRecZIndex(event.step.id, "reset");
                 });
 
                 // Preload images before starting tour
