@@ -506,7 +506,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         floatingUIOptions: {
           middleware: [
-            offset({ mainAxis: -64, crossAxis: 0 }),
+            offset({ mainAxis: 0, crossAxis: 0 }),
             // Removed shift middleware and kept only offset
           ],
         },
