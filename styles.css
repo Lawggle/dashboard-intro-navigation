@@ -1,0 +1,242 @@
+/* Custom content structure CSS - keeping only what's needed for the layout */
+.custom-intro-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.image-side {
+  flex-shrink: 0;
+}
+
+.intro-image-container {
+  width: 180px;
+  height: 180px; /* Fixed height to prevent layout shifts */
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth easing */
+  transform: scale(1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1); /* Subtle background while loading */
+  position: relative;
+}
+
+.intro-image-container::before {
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 171, 48, 0.3);
+  border-top: 3px solid #ffab30;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.intro-image-container.loaded::before {
+  opacity: 0;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.intro-step-image {
+  width: 180px;
+  height: auto;
+  max-height: 180px;
+  object-fit: contain;
+  border-radius: 6px;
+  display: block;
+  margin: auto;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  position: relative;
+  z-index: 1;
+}
+
+.intro-step-image.loaded {
+  opacity: 1;
+}
+
+.intro-image-container.animate-in {
+  animation: imageSlideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes imageSlideIn {
+  0% {
+    transform: scale(0.95) translateY(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.content-side {
+  flex-grow: 1;
+}
+
+.intro-title {
+  margin: 0 0 10px 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: #1f1f1f;
+}
+
+.intro-description {
+  margin: 0;
+  line-height: 1.5;
+  color: #1f1f1f;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.combined-intro-section {
+  margin-bottom: 20px;
+}
+
+.combined-intro-section:last-child {
+  margin-bottom: 0;
+}
+
+.intro-divider {
+  margin: 15px 0;
+  border: none;
+  border-top: 1px solid #ddd;
+  opacity: 0.6;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .custom-intro-content {
+    flex-direction: row;
+    text-align: left;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .intro-image-container {
+    width: 90px;
+    height: auto; /* Auto height for mobile flexibility */
+    min-height: 90px; /* Minimum height to prevent collapse */
+    margin: 0;
+    flex-shrink: 0;
+    background: rgba(
+      255,
+      255,
+      255,
+      0.05
+    ); /* More visible background on mobile */
+  }
+
+  .intro-step-image {
+    width: 90px;
+    height: auto;
+    max-height: none; /* Remove max-height constraint on mobile */
+    min-height: 60px; /* Ensure minimum visibility */
+  }
+
+  .intro-title {
+    padding-bottom: 0px;
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .intro-description {
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: left;
+  }
+
+  .intro-divider {
+    margin: 10px 0;
+  }
+}
+
+.shepherd-element {
+  z-index: 100000;
+  font-family: "Switzer", sans-serif;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.shepherd-modal-is-visible {
+  z-index: 99999;
+}
+
+.shepherd-element:focus-visible {
+  outline: 0px !important;
+}
+
+.shepherd-header {
+  display: none;
+}
+
+.shepherd-content {
+  background-color: #ffe0b6;
+  box-shadow: 0px 4px 32px -4px #ffe0b6;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@media (min-width: 1024px) {
+  .shepherd-element {
+    width: 600px !important;
+  }
+}
+
+.shepherd-arrow::before {
+  background-color: #ffe0b6 !important;
+}
+
+.shepherd-button {
+  background: #ffab30;
+  font-weight: 600;
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+}
+
+.shepherd-button:hover {
+  background: #ff9500 !important;
+}
+
+.shepherd-button-secondary.shepherd-button {
+  background: white;
+  transition: background-color 0.2s ease;
+}
+
+.shepherd-button-secondary.shepherd-button:hover {
+  background: #f5f5f5 !important;
+}
+
+.shepherd-text {
+  padding: 10px;
+  padding-bottom: 5px;
+}
+
+.custom-shepherd-step {
+  @media (min-width: 1024px) {
+    max-width: 600px !important;
+  }
+}
+
+.custom-step-counter {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .custom-step-counter {
+    font-size: 12px;
+  }
+}
