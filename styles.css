@@ -153,6 +153,13 @@
   z-index: 100000;
   font-family: "Switzer", sans-serif;
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  opacity: 1 !important; /* Override Shepherd's default opacity animation */
+}
+
+/* Disable Shepherd's default entrance animation to prevent blinking */
+.shepherd-element[data-popper-placement] {
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 /* Left-to-right slide animation for shepherd element */
