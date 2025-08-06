@@ -68,21 +68,6 @@
   opacity: 1;
 }
 
-.intro-image-container.animate-in {
-  animation: imageSlideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
-
-@keyframes imageSlideIn {
-  0% {
-    transform: scale(0.95) translateY(10px);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1) translateY(0);
-    opacity: 1;
-  }
-}
-
 .content-side {
   flex-grow: 1;
 }
@@ -168,6 +153,22 @@
   z-index: 100000;
   font-family: "Switzer", sans-serif;
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Left-to-right slide animation for shepherd element */
+.shepherd-element.shepherd-slide-in {
+  animation: shepherdSlideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes shepherdSlideIn {
+  0% {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .shepherd-modal-is-visible {
