@@ -1080,6 +1080,19 @@ document.addEventListener("DOMContentLoaded", function () {
               // Set up smooth loading
               const imageUrl = image.src;
 
+              // Function to apply entrance animation after image is loaded
+              const applyEntranceAnimation = () => {
+                const animationDelay = isMobileDevice() ? 100 : 50;
+                setTimeout(() => {
+                  imageContainer.classList.add("animate-in");
+                }, animationDelay);
+
+                // Remove animation class after completion
+                setTimeout(() => {
+                  imageContainer.classList.remove("animate-in");
+                }, 600);
+              };
+
               // Force image reload on mobile to prevent caching issues
               if (isMobileDevice()) {
                 image.src = "";
@@ -1093,12 +1106,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 image.classList.add("loaded");
                 imageContainer.classList.add("loaded");
                 console.log(`Step image ${index + 1} already loaded`);
+                // Apply entrance animation since image is ready
+                applyEntranceAnimation();
               } else {
                 // Otherwise wait for load
                 image.addEventListener("load", () => {
                   image.classList.add("loaded");
                   imageContainer.classList.add("loaded");
                   console.log(`Step image ${index + 1} loaded successfully`);
+                  // Apply entrance animation after image loads
+                  applyEntranceAnimation();
                 });
 
                 image.addEventListener("error", () => {
@@ -1116,6 +1133,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Still show as loaded to hide spinner
                     image.classList.add("loaded");
                     imageContainer.classList.add("loaded");
+                    // Apply entrance animation even on error
+                    applyEntranceAnimation();
                   }
                 });
 
@@ -1130,24 +1149,15 @@ document.addEventListener("DOMContentLoaded", function () {
                       );
                       image.classList.add("loaded");
                       imageContainer.classList.add("loaded");
+                      // Apply entrance animation for mobile fallback
+                      applyEntranceAnimation();
                     }
                   }, 2000);
                 }
               }
+
+              console.log(`Step image ${index + 1} initialized successfully`);
             }
-
-            // Add entrance animation with slight delay for smoothness
-            const animationDelay = isMobileDevice() ? 100 : 50;
-            setTimeout(() => {
-              imageContainer.classList.add("animate-in");
-            }, animationDelay);
-
-            // Remove animation class after completion
-            setTimeout(() => {
-              imageContainer.classList.remove("animate-in");
-            }, 600);
-
-            console.log(`Step image ${index + 1} initialized successfully`);
           } catch (error) {
             console.error(`Error initializing step image ${index + 1}:`, error);
           }
