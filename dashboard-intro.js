@@ -1399,7 +1399,12 @@ document.addEventListener("DOMContentLoaded", function () {
                   setTimeout(initializeStepImages, imageInitDelay);
 
                   // Apply left-to-right animation to the entire shepherd element
-                  setTimeout(applyShepherdSlideAnimation, imageInitDelay + 50);
+                  // Add extra delay for first step to avoid conflicts with Shepherd's initial animation
+                  const isFirstStep = event.step.id === steps[0].id;
+                  const animationDelay = isFirstStep
+                    ? imageInitDelay + 300
+                    : imageInitDelay + 50;
+                  setTimeout(applyShepherdSlideAnimation, animationDelay);
                 });
 
                 // Preload images before starting tour
