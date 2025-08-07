@@ -178,6 +178,24 @@
   }
 }
 
+/* Mobile-friendly animation - gentle fade with scale */
+@media (max-width: 768px) {
+  .shepherd-element.shepherd-slide-in {
+    animation: shepherdMobileFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+  }
+}
+
+@keyframes shepherdMobileFadeIn {
+  0% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .shepherd-modal-is-visible {
   z-index: 99999;
 }

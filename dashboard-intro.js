@@ -46,19 +46,19 @@ document.addEventListener("DOMContentLoaded", function () {
     // Define images for each step
     const stepImages = {
       "my-stats":
-        "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/688e4035f058589e135b8874_Stats%20page.png",
+        "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/6894840c55429d39846de609_my%20stats%20-%20same%20size.png",
       "competitive-metrics":
-        "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/68919856f786d570b0c7d038_competetive%20metrics-croped-2.png",
+        "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/6894840c0bf2b62b4e1c4401_competetive%20metrics%20-%20same%20size.png",
       messages:
-        "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/688e4033961d84e358819cb2_my%20messages.png",
+        "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/6894840cfd1c52a0f1fe7901_my%20messages%20-%20same%20size.png",
       profile:
-        "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/688f7ee0927aeb9c32ab95d0_Profile%20Page-croped.png",
+        "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/6894840c1f61f57b2dfa0fc5_my%20profile%20v2%20-%20same%20size.png",
       feedback:
-        "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/68919b01dec324c2a0ef8d40_feedback-croped-2.png",
+        "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/6894840c39a3256bbc8a4899_Feedback%20-%20same%20size.png",
       "ai-recommendations":
-        "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/68919b01f786d570b0c8617e_ai%20recommendations-croped-2.png",
+        "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/6894840cda7e8c62b51e7f94_AI%20recommendations%20-%20same%20size.png",
       "ai-assistant":
-        "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/688e4035a43ec70b8fa34d43_AI%20assistant.png",
+        "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/6894840cc82a629eb2488fbd_my%20assistant%20v2%20-%20same%20size.png",
     };
 
     // Helper function to create intro content with image and step numbers
