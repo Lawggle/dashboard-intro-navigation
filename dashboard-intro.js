@@ -729,9 +729,9 @@ document.addEventListener("DOMContentLoaded", function () {
         ),
         attachTo: {
           element: "#feedback-section",
-          on: "bottom",
+          on: "auto",
         },
-        classes: "feedback-step-wide",
+        classes: "custom-shepherd-step feedback-step-wide",
         floatingUIOptions: {
           middleware: [
             offset({ mainAxis: 16, crossAxis: 0 }),
@@ -818,6 +818,12 @@ document.addEventListener("DOMContentLoaded", function () {
             },
           },
         ],
+        floatingUIOptions: {
+          middleware: [
+            offset({ mainAxis: 0, crossAxis: 0 }),
+            // Removed shift middleware - it was overriding the "left" placement
+          ],
+        },
       },
     ];
 
@@ -880,6 +886,17 @@ document.addEventListener("DOMContentLoaded", function () {
           element: "#feedback-section",
           on: "top",
         },
+        floatingUIOptions: {
+          middleware: [
+            offset({ mainAxis: 0, crossAxis: 0 }),
+            // Removed shift middleware - it was overriding the "bottom" placement
+          ],
+        },
+        scrollTo: {
+          behavior: "smooth",
+          block: "end", // Show top of element instead of centering
+          inline: "nearest",
+        },
         buttons: [
           {
             text: "← Back",
@@ -908,7 +925,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ),
         attachTo: {
           element: "#my-messages-btn",
-          on: "bottom",
+          on: "top",
         },
         beforeShowPromise: function () {
           return handleMobileMenuForStep(this);
@@ -942,6 +959,17 @@ document.addEventListener("DOMContentLoaded", function () {
         attachTo: {
           element: "#locked-ai-rec",
           on: "top",
+        },
+        floatingUIOptions: {
+          middleware: [
+            offset({ mainAxis: 0, crossAxis: 0 }),
+            // Removed shift middleware and kept only offset
+          ],
+        },
+        scrollTo: {
+          behavior: "smooth",
+          block: "start", // Show top of element instead of centering
+          inline: "nearest",
         },
         buttons: [
           {
@@ -1004,7 +1032,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ),
         attachTo: {
           element: "#ai-bot-btn",
-          on: "left",
+          on: "top",
         },
         buttons: [
           {
