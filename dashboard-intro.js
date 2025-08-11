@@ -216,7 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
         title: "My Messages (3/7)",
         text: createIntroContent(
           "My Messages",
-          "Where potential clients become actual clients. This is your direct line to every lead – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count.",
+          "Where potential clients become actual clients. This is your direct line to every match – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count.",
           "messages",
           3,
           7
@@ -246,7 +246,7 @@ document.addEventListener("DOMContentLoaded", function () {
         title: "Profile Settings Page (4/7)",
         text: createIntroContent(
           "Profile Settings Page",
-          "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice.",
+          "Your profile settings – think of it as your opening statement to potential clients. This is where matches play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice.",
           "profile",
           4,
           7
@@ -462,7 +462,7 @@ document.addEventListener("DOMContentLoaded", function () {
         title: "My Messages (3/6)",
         text: createIntroContent(
           "My Messages",
-          "Where potential clients become actual clients. This is your direct line to every lead – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count.",
+          "Where potential clients become actual clients. This is your direct line to every match – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count.",
           "messages",
           3,
           6
@@ -536,7 +536,7 @@ document.addEventListener("DOMContentLoaded", function () {
         title: "Profile Settings Page (5/6)",
         text: createIntroContent(
           "Profile Settings Page",
-          "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice.",
+          "Your profile settings – think of it as your opening statement to potential clients. This is where matches play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice.",
           "profile",
           5,
           6
@@ -662,7 +662,7 @@ document.addEventListener("DOMContentLoaded", function () {
         title: "My Messages (3/7)",
         text: createIntroContent(
           "My Messages",
-          "Where potential clients become actual clients. This is your direct line to every lead – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count.",
+          "Where potential clients become actual clients. This is your direct line to every match – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count.",
           "messages",
           3,
           7
@@ -692,7 +692,7 @@ document.addEventListener("DOMContentLoaded", function () {
         title: "Profile Settings Page (4/7)",
         text: createIntroContent(
           "Profile Settings Page",
-          "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice.",
+          "Your profile settings – think of it as your opening statement to potential clients. This is where matches play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice.",
           "profile",
           4,
           7
@@ -771,7 +771,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ),
         attachTo: {
           element: "#locked-ai-rec",
-          on: "top",
+          on: "left",
         },
         buttons: [
           {
@@ -918,7 +918,7 @@ document.addEventListener("DOMContentLoaded", function () {
         title: "My Messages (3/6)",
         text: createIntroContent(
           "My Messages",
-          "Where potential clients become actual clients. This is your direct line to every lead – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count.",
+          "Where potential clients become actual clients. This is your direct line to every match – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count.",
           "messages",
           3,
           6
@@ -992,7 +992,7 @@ document.addEventListener("DOMContentLoaded", function () {
         title: "Profile Settings Page (5/6)",
         text: createIntroContent(
           "Profile Settings Page",
-          "Your profile settings – think of it as your opening statement to potential clients. This is where leads play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice.",
+          "Your profile settings – think of it as your opening statement to potential clients. This is where matches play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice.",
           "profile",
           5,
           6
