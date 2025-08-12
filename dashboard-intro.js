@@ -1514,17 +1514,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
                   // Update memberstack data
                   // Uncomment when ready to track completion
-                  // const memberstack = window.$memberstackDom;
-                  // memberstack.getCurrentMember().then(async ({ data: member }) => {
-                  //   if (member) {
-                  //     let memberJson = await memberstack.getMemberJSON();
-                  //     memberJson.hasLoggedInBefore = true;
-                  //     const updatedJson = await memberstack.updateMemberJSON({
-                  //       json: memberJson,
-                  //     });
-                  //     console.log("Member JSON updated:", updatedJson);
-                  //   }
-                  // });
+                  const memberstack = window.$memberstackDom;
+                  memberstack
+                    .getCurrentMember()
+                    .then(async ({ data: member }) => {
+                      if (member) {
+                        let memberJson = await memberstack.getMemberJSON();
+                        memberJson.hasLoggedInBefore = true;
+                        const updatedJson = await memberstack.updateMemberJSON({
+                          json: memberJson,
+                        });
+                        console.log("Member JSON updated:", updatedJson);
+                      }
+                    });
                 });
 
                 tour.on("cancel", () => {
@@ -1543,17 +1545,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
                   // Update memberstack data
                   // Uncomment when ready to track completion
-                  // const memberstack = window.$memberstackDom;
-                  // memberstack.getCurrentMember().then(async ({ data: member }) => {
-                  //   if (member) {
-                  //     let memberJson = await memberstack.getMemberJSON();
-                  //     memberJson.hasLoggedInBefore = true;
-                  //     const updatedJson = await memberstack.updateMemberJSON({
-                  //       json: memberJson,
-                  //     });
-                  //     console.log("Member JSON updated:", updatedJson);
-                  //   }
-                  // });
+                  const memberstack = window.$memberstackDom;
+                  memberstack
+                    .getCurrentMember()
+                    .then(async ({ data: member }) => {
+                      if (member) {
+                        let memberJson = await memberstack.getMemberJSON();
+                        memberJson.hasLoggedInBefore = true;
+                        const updatedJson = await memberstack.updateMemberJSON({
+                          json: memberJson,
+                        });
+                        console.log("Member JSON updated:", updatedJson);
+                      }
+                    });
                 });
               } else {
                 console.warn(
