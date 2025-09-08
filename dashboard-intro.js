@@ -57,6 +57,8 @@ document.addEventListener("DOMContentLoaded", function () {
         "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/6894840c39a3256bbc8a4899_Feedback%20-%20same%20size.png",
       "ai-recommendations":
         "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/6894840cda7e8c62b51e7f94_AI%20recommendations%20-%20same%20size.png",
+      "lawggle-challenges":
+        "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/6894840c55429d39846de609_my%20stats%20-%20same%20size.png", // Mock image for now
       "ai-assistant":
         "https://cdn.prod.website-files.com/67e360f08a15ef65d8814b41/6894840cc82a629eb2488fbd_my%20assistant%20v2%20-%20same%20size.png",
     };
@@ -153,13 +155,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const advancedUserSteps = [
       {
         id: "my-stats",
-        title: "My Statistics (1/7)",
+        title: "My Statistics (1/8)",
         text: createIntroContent(
           "My Statistics",
           "Your personal performance dashboard. Track your response times, conversion rates, and other key metrics that matter. Consider it your practice's vital signs – because you can't improve what you don't measure.",
           "my-stats",
           1,
-          7
+          8
         ),
         attachTo: {
           element: "#my-stats-btn",
@@ -183,13 +185,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         id: "competitive-metrics",
-        title: "Competitive Metrics (2/7)",
+        title: "Competitive Metrics (2/8)",
         text: createIntroContent(
           "Competitive Metrics",
           "Where you see how you measure up against opposing counsel (on the platform, that is). Consider this your performance review against the competition. Nothing motivates quite like seeing exactly where you rank in the pecking order. Time to raise the bar.",
           "competitive-metrics",
           2,
-          7
+          8
         ),
         attachTo: {
           element: "#c-metrics-button",
@@ -213,13 +215,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         id: "my-messages",
-        title: "My Messages (3/7)",
+        title: "My Messages (3/8)",
         text: createIntroContent(
           "My Messages",
           "Where potential clients become actual clients. This is your direct line to every match – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count.",
           "messages",
           3,
-          7
+          8
         ),
         attachTo: {
           element: "#my-messages-btn",
@@ -243,13 +245,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         id: "profile",
-        title: "Profile Settings Page (4/7)",
+        title: "Profile Settings Page (4/8)",
         text: createIntroContent(
           "Profile Settings Page",
           "Your profile settings – think of it as your opening statement to potential clients. This is where matches play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice.",
           "profile",
           4,
-          7
+          8
         ),
         attachTo: {
           element: "#profile-btn",
@@ -273,13 +275,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         id: "feedback",
-        title: "Feedback (5/7)",
+        title: "Feedback (5/8)",
         text: createIntroContent(
           "Feedback",
           "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief.",
           "feedback",
           5,
-          7
+          8
         ),
         attachTo: {
           element: "#feedback-section",
@@ -304,13 +306,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         id: "ai-recommendations",
-        title: "AI Recommendations (6/7)",
+        title: "AI Recommendations (6/8)",
         text: createIntroContent(
           "AI Recommendations",
           "Your personalized practice improvement plan, refreshed every 5 days. Our AI reviews your profile like opposing counsel would – finding every gap and weak point. Complete these suggestions to boost your profile strength score and completion percentage. Note: changes won't reflect immediately; think of it as a 5-day review period. The higher your score, the more compelling your case to potential clients.",
           "ai-recommendations",
           6,
-          7
+          8
         ),
         attachTo: {
           element: "#ai-rec-section",
@@ -333,14 +335,44 @@ document.addEventListener("DOMContentLoaded", function () {
         ],
       },
       {
+        id: "lawggle-challenges",
+        title: "Lawggle Challenges (7/8)",
+        text: createIntroContent(
+          "Lawggle Challenges",
+          "Test your legal knowledge and compete with other lawyers in our interactive challenge system. Earn points, climb leaderboards, and showcase your expertise across different practice areas. Think of it as continuing legal education that's actually engaging – where learning meets competition.",
+          "lawggle-challenges",
+          7,
+          8
+        ),
+        attachTo: {
+          element: "#lawggle-challenges",
+          on: "right",
+        },
+        buttons: [
+          {
+            text: "← Back",
+            action() {
+              return this.back();
+            },
+            classes: "shepherd-button-secondary",
+          },
+          {
+            text: "Next →",
+            action() {
+              return this.next();
+            },
+          },
+        ],
+      },
+      {
         id: "ai-assistant",
-        title: "AI Assistant (7/7)",
+        title: "AI Assistant (8/8)",
         text: createIntroContent(
           "AI Assistant",
           "Your digital associate, minus the billable hours. While it can't access your dashboard data, it can guide you through platform features, draft documents, brainstorm strategies, or answer virtually any question. Think of it as having a knowledgeable colleague on call 24/7 – one who never takes vacation or needs coffee. From contract templates to case law queries, just ask.",
           "ai-assistant",
-          7,
-          7
+          8,
+          8
         ),
         attachTo: {
           element: "#ai-bot-btn",
@@ -374,7 +406,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const advancedMobileUserSteps = [
       {
         id: "stats-menu-mobile",
-        title: "Statistics & Metrics (1/6)",
+        title: "Statistics & Metrics (1/7)",
         text: createCombinedIntroContent(
           [
             {
@@ -391,7 +423,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
           ],
           1,
-          6
+          7
         ),
         attachTo: {
           element: "#stats-menu-list",
@@ -418,13 +450,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         id: "feedback-mobile",
-        title: "Feedback (2/6)",
+        title: "Feedback (2/7)",
         text: createIntroContent(
           "Feedback",
           "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief.",
           "feedback",
           2,
-          6
+          7
         ),
         attachTo: {
           element: "#feedback-section",
@@ -459,13 +491,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         id: "my-messages-mobile",
-        title: "My Messages (3/6)",
+        title: "My Messages (3/7)",
         text: createIntroContent(
           "My Messages",
           "Where potential clients become actual clients. This is your direct line to every match – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count.",
           "messages",
           3,
-          6
+          7
         ),
         attachTo: {
           element: "#my-messages-btn",
@@ -492,13 +524,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         id: "ai-recommendations-mobile",
-        title: "AI Recommendations (4/6)",
+        title: "AI Recommendations (4/7)",
         text: createIntroContent(
           "AI Recommendations",
           "Your personalized practice improvement plan, refreshed every 5 days. Our AI reviews your profile like opposing counsel would – finding every gap and weak point. Complete these suggestions to boost your profile strength score and completion percentage. Note: changes won't reflect immediately; think of it as a 5-day review period. The higher your score, the more compelling your case to potential clients.",
           "ai-recommendations",
           4,
-          6
+          7
         ),
         attachTo: {
           element: "#ai-rec-section",
@@ -533,13 +565,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         id: "profile-mobile",
-        title: "Profile Settings Page (5/6)",
+        title: "Profile Settings Page (5/7)",
         text: createIntroContent(
           "Profile Settings Page",
           "Your profile settings – think of it as your opening statement to potential clients. This is where matches play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice.",
           "profile",
           5,
-          6
+          7
         ),
         attachTo: {
           element: "#profile-btn",
@@ -565,14 +597,44 @@ document.addEventListener("DOMContentLoaded", function () {
         ],
       },
       {
+        id: "lawggle-challenges-mobile",
+        title: "Lawggle Challenges (6/7)",
+        text: createIntroContent(
+          "Lawggle Challenges",
+          "Test your legal knowledge and compete with other lawyers in our interactive challenge system. Earn points, climb leaderboards, and showcase your expertise across different practice areas. Think of it as continuing legal education that's actually engaging – where learning meets competition.",
+          "lawggle-challenges",
+          6,
+          7
+        ),
+        attachTo: {
+          element: "#lawggle-challenges",
+          on: "bottom",
+        },
+        buttons: [
+          {
+            text: "← Back",
+            action() {
+              return this.back();
+            },
+            classes: "shepherd-button-secondary",
+          },
+          {
+            text: "Next →",
+            action() {
+              return this.next();
+            },
+          },
+        ],
+      },
+      {
         id: "ai-assistant-mobile",
-        title: "AI Assistant (6/6)",
+        title: "AI Assistant (7/7)",
         text: createIntroContent(
           "AI Assistant",
           "Your digital associate, minus the billable hours. While it can't access your dashboard data, it can guide you through platform features, draft documents, brainstorm strategies, or answer virtually any question. Think of it as having a knowledgeable colleague on call 24/7 – one who never takes vacation or needs coffee. From contract templates to case law queries, just ask.",
           "ai-assistant",
-          6,
-          6
+          7,
+          7
         ),
         attachTo: {
           element: "#ai-bot-btn",
@@ -599,13 +661,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const essentialUserSteps = [
       {
         id: "my-stats-locked",
-        title: "My Stats (1/7)",
+        title: "My Stats (1/8)",
         text: createIntroContent(
           "My Stats",
           "Your personal performance dashboard. Track your response times, conversion rates, and other key metrics that matter. Consider it your practice's vital signs – because you can't improve what you don't measure. Time to see the evidence of your efforts.",
           "my-stats",
           1,
-          7
+          8
         ),
         attachTo: {
           element: "#my-stats-btn-locked",
@@ -629,13 +691,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         id: "competitive-metrics-locked",
-        title: "Competitive Metrics (2/7)",
+        title: "Competitive Metrics (2/8)",
         text: createIntroContent(
           "Competitive Metrics",
           "Where you see how you measure up against opposing counsel (on the platform, that is). Consider this your performance review against the competition. Nothing motivates quite like seeing exactly where you rank in the pecking order. Time to raise the bar.",
           "competitive-metrics",
           2,
-          7
+          8
         ),
         attachTo: {
           element: "#c-metrics-button-locked",
@@ -659,13 +721,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         id: "my-messages-essential",
-        title: "My Messages (3/7)",
+        title: "My Messages (3/8)",
         text: createIntroContent(
           "My Messages",
           "Where potential clients become actual clients. This is your direct line to every match – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count.",
           "messages",
           3,
-          7
+          8
         ),
         attachTo: {
           element: "#my-messages-btn",
@@ -689,13 +751,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         id: "profile-essential",
-        title: "Profile Settings Page (4/7)",
+        title: "Profile Settings Page (4/8)",
         text: createIntroContent(
           "Profile Settings Page",
           "Your profile settings – think of it as your opening statement to potential clients. This is where matches play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice.",
           "profile",
           4,
-          7
+          8
         ),
         attachTo: {
           element: "#profile-btn",
@@ -719,13 +781,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         id: "feedback-essential",
-        title: "Feedback (5/7)",
+        title: "Feedback (5/8)",
         text: createIntroContent(
           "Feedback",
           "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief.",
           "feedback",
           5,
-          7
+          8
         ),
         attachTo: {
           element: "#feedback-section",
@@ -761,13 +823,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         id: "ai-recommendations-locked",
-        title: "AI Recommendations (6/7)",
+        title: "AI Recommendations (6/8)",
         text: createIntroContent(
           "AI Recommendations",
           "Your personalized practice improvement plan, refreshed every 5 days. Our AI reviews your profile like opposing counsel would – finding every gap and weak point. Complete these suggestions to boost your profile strength score and completion percentage. Note: changes won't reflect immediately; think of it as a 5-day review period. The higher your score, the more compelling your case to potential clients.",
           "ai-recommendations",
           6,
-          7
+          8
         ),
         attachTo: {
           element: "#locked-ai-rec",
@@ -790,14 +852,44 @@ document.addEventListener("DOMContentLoaded", function () {
         ],
       },
       {
+        id: "lawggle-challenges-essential",
+        title: "Lawggle Challenges (7/8)",
+        text: createIntroContent(
+          "Lawggle Challenges",
+          "Test your legal knowledge and compete with other lawyers in our interactive challenge system. Earn points, climb leaderboards, and showcase your expertise across different practice areas. Think of it as continuing legal education that's actually engaging – where learning meets competition.",
+          "lawggle-challenges",
+          7,
+          8
+        ),
+        attachTo: {
+          element: "#lawggle-challenges",
+          on: "right",
+        },
+        buttons: [
+          {
+            text: "← Back",
+            action() {
+              return this.back();
+            },
+            classes: "shepherd-button-secondary",
+          },
+          {
+            text: "Next →",
+            action() {
+              return this.next();
+            },
+          },
+        ],
+      },
+      {
         id: "ai-assistant-essential",
-        title: "AI Assistant (7/7)",
+        title: "AI Assistant (8/8)",
         text: createIntroContent(
           "AI Assistant",
           "Your digital associate, minus the billable hours. While it can't access your dashboard data, it can guide you through platform features, draft documents, brainstorm strategies, or answer virtually any question. Think of it as having a knowledgeable colleague on call 24/7 – one who never takes vacation or needs coffee. From contract templates to case law queries, just ask.",
           "ai-assistant",
-          7,
-          7
+          8,
+          8
         ),
         attachTo: {
           element: "#ai-bot-btn",
@@ -830,7 +922,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const essentialMobileUserSteps = [
       {
         id: "stats-menu-essential-mobile",
-        title: "Statistics & Metrics (1/6)",
+        title: "Statistics & Metrics (1/7)",
         text: createCombinedIntroContent(
           [
             {
@@ -847,7 +939,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
           ],
           1,
-          6
+          7
         ),
         attachTo: {
           element: "#stats-menu-list",
@@ -874,13 +966,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         id: "feedback-essential-mobile",
-        title: "Feedback (2/6)",
+        title: "Feedback (2/7)",
         text: createIntroContent(
           "Feedback",
           "Where your objections and observations help shape our case. We're in beta, which means your input isn't just welcome – it's critical evidence. Spotted a bug? Found an error? Have a suggestion? File it here. Consider yourself co-counsel in building a better platform. We review every submission like it's a Supreme Court brief.",
           "feedback",
           2,
-          6
+          7
         ),
         attachTo: {
           element: "#feedback-section",
@@ -915,13 +1007,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         id: "my-messages-essential-mobile",
-        title: "My Messages (3/6)",
+        title: "My Messages (3/7)",
         text: createIntroContent(
           "My Messages",
           "Where potential clients become actual clients. This is your direct line to every match – respond promptly, professionally, and persuasively. Think of each message as a mini consultation. First responses make lasting impressions, so make them count.",
           "messages",
           3,
-          6
+          7
         ),
         attachTo: {
           element: "#my-messages-btn",
@@ -948,13 +1040,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         id: "ai-recommendations-essential-mobile",
-        title: "AI Recommendations (4/6)",
+        title: "AI Recommendations (4/7)",
         text: createIntroContent(
           "AI Recommendations",
           "Your personalized practice improvement plan, refreshed every 5 days. Our AI reviews your profile like opposing counsel would – finding every gap and weak point. Complete these suggestions to boost your profile strength score and completion percentage. Note: changes won't reflect immediately; think of it as a 5-day review period. The higher your score, the more compelling your case to potential clients.",
           "ai-recommendations",
           4,
-          6
+          7
         ),
         attachTo: {
           element: "#locked-ai-rec",
@@ -989,13 +1081,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         id: "profile-essential-mobile",
-        title: "Profile Settings Page (5/6)",
+        title: "Profile Settings Page (5/7)",
         text: createIntroContent(
           "Profile Settings Page",
           "Your profile settings – think of it as your opening statement to potential clients. This is where matches play judge and jury, deciding which lawyer to call. Make your case compelling: the more detail you provide, the stronger your appeal. Consider it due diligence for your own practice.",
           "profile",
           5,
-          6
+          7
         ),
         attachTo: {
           element: "#profile-btn",
@@ -1021,14 +1113,44 @@ document.addEventListener("DOMContentLoaded", function () {
         ],
       },
       {
+        id: "lawggle-challenges-essential-mobile",
+        title: "Lawggle Challenges (6/7)",
+        text: createIntroContent(
+          "Lawggle Challenges",
+          "Test your legal knowledge and compete with other lawyers in our interactive challenge system. Earn points, climb leaderboards, and showcase your expertise across different practice areas. Think of it as continuing legal education that's actually engaging – where learning meets competition.",
+          "lawggle-challenges",
+          6,
+          7
+        ),
+        attachTo: {
+          element: "#lawggle-challenges",
+          on: "bottom",
+        },
+        buttons: [
+          {
+            text: "← Back",
+            action() {
+              return this.back();
+            },
+            classes: "shepherd-button-secondary",
+          },
+          {
+            text: "Next →",
+            action() {
+              return this.next();
+            },
+          },
+        ],
+      },
+      {
         id: "ai-assistant-essential-mobile",
-        title: "AI Assistant (6/6)",
+        title: "AI Assistant (7/7)",
         text: createIntroContent(
           "AI Assistant",
           "Your digital associate, minus the billable hours. While it can't access your dashboard data, it can guide you through platform features, draft documents, brainstorm strategies, or answer virtually any question. Think of it as having a knowledgeable colleague on call 24/7 – one who never takes vacation or needs coffee. From contract templates to case law queries, just ask.",
           "ai-assistant",
-          6,
-          6
+          7,
+          7
         ),
         attachTo: {
           element: "#ai-bot-btn",
