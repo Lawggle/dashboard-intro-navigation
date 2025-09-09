@@ -339,7 +339,7 @@ document.addEventListener("DOMContentLoaded", function () {
         title: "Lawggle Challenges (7/8)",
         text: createIntroContent(
           "Lawggle Challenges",
-          "Test your legal knowledge and compete with other lawyers in our interactive challenge system. Earn points, climb leaderboards, and showcase your expertise across different practice areas. Think of it as continuing legal education that's actually engaging – where learning meets competition.",
+          "Every Monday, you’ll get up to four personalized challenges—quick, focused tasks that help sharpen your profile, boost responsiveness, and grow your visibility. Complete challenges to earn points, and those points add up each month to determine your badge level. The better your performance, the better your badge—visible right on your public profile when potential clients view you in Matchbot. There are three levels to earn: Rising Star (new but promising), Power Player (established, making moves), and Top Lawyer (the elite tier). It’s your reputation, quantified—and a great way to show clients you’re not just in the game, you’re here to win it.",
           "lawggle-challenges",
           7,
           8
@@ -601,7 +601,7 @@ document.addEventListener("DOMContentLoaded", function () {
         title: "Lawggle Challenges (6/7)",
         text: createIntroContent(
           "Lawggle Challenges",
-          "Test your legal knowledge and compete with other lawyers in our interactive challenge system. Earn points, climb leaderboards, and showcase your expertise across different practice areas. Think of it as continuing legal education that's actually engaging – where learning meets competition.",
+          "Every Monday, you’ll get up to four personalized challenges—quick, focused tasks that help sharpen your profile, boost responsiveness, and grow your visibility. Complete challenges to earn points, and those points add up each month to determine your badge level. The better your performance, the better your badge—visible right on your public profile when potential clients view you in Matchbot. There are three levels to earn: Rising Star (new but promising), Power Player (established, making moves), and Top Lawyer (the elite tier). It’s your reputation, quantified—and a great way to show clients you’re not just in the game, you’re here to win it.",
           "lawggle-challenges",
           6,
           7
@@ -856,7 +856,7 @@ document.addEventListener("DOMContentLoaded", function () {
         title: "Lawggle Challenges (7/8)",
         text: createIntroContent(
           "Lawggle Challenges",
-          "Test your legal knowledge and compete with other lawyers in our interactive challenge system. Earn points, climb leaderboards, and showcase your expertise across different practice areas. Think of it as continuing legal education that's actually engaging – where learning meets competition.",
+          "Every Monday, you’ll get up to four personalized challenges—quick, focused tasks that help sharpen your profile, boost responsiveness, and grow your visibility. Complete challenges to earn points, and those points add up each month to determine your badge level. The better your performance, the better your badge—visible right on your public profile when potential clients view you in Matchbot. There are three levels to earn: Rising Star (new but promising), Power Player (established, making moves), and Top Lawyer (the elite tier). It’s your reputation, quantified—and a great way to show clients you’re not just in the game, you’re here to win it.",
           "lawggle-challenges",
           7,
           8
@@ -1117,7 +1117,7 @@ document.addEventListener("DOMContentLoaded", function () {
         title: "Lawggle Challenges (6/7)",
         text: createIntroContent(
           "Lawggle Challenges",
-          "Test your legal knowledge and compete with other lawyers in our interactive challenge system. Earn points, climb leaderboards, and showcase your expertise across different practice areas. Think of it as continuing legal education that's actually engaging – where learning meets competition.",
+          "Every Monday, you’ll get up to four personalized challenges—quick, focused tasks that help sharpen your profile, boost responsiveness, and grow your visibility. Complete challenges to earn points, and those points add up each month to determine your badge level. The better your performance, the better your badge—visible right on your public profile when potential clients view you in Matchbot. There are three levels to earn: Rising Star (new but promising), Power Player (established, making moves), and Top Lawyer (the elite tier). It’s your reputation, quantified—and a great way to show clients you’re not just in the game, you’re here to win it.",
           "lawggle-challenges",
           6,
           7
